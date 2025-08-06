@@ -1,0 +1,9 @@
+{
+  "cluster_name": "on_off",
+  "cluster_id": "0x0006",
+  "query_type": "state_transition_rules",
+  "les_model": "*** Variable declarations\nvars DeviceX : Device .\nvars UserY : User .\nvars StateA StateB : State .\n*** State-transition rules for On/Off\neq < DeviceX |'attribute': StateA , ... >\n-> < DeviceX |'attribute': StateB , ... > .\neq < DeviceX |'attribute': StateB , ... >\n-> < DeviceX |'attribute': StateA , ... > .\n*** Event generation rules for On/Off\neq < DeviceX |'attribute': StateA , ... >\n-> 'event': StateChanged (DeviceX) .\neq < DeviceX |'attribute': StateB , ... >\n-> 'event': StateChanged (DeviceX) .",
+  "raw_response": "*** Variable declarations\nvars DeviceX : Device .\nvars UserY : User .\nvars StateA StateB : State .\n\n*** State-transition rules for On/Off\neq < DeviceX |'attribute': StateA , ... >\n   $ UserY'command'DeviceX\n-> < DeviceX |'attribute': StateB , ... > .\n\neq < DeviceX |'attribute': StateB , ... >\n   $ UserY'command'DeviceX\n-> < DeviceX |'attribute': StateA , ... > .\n\n*** Event generation rules for On/Off\neq < DeviceX |'attribute': StateA , ... >\n   -> 'event': StateChanged (DeviceX) .\n\neq < DeviceX |'attribute': StateB , ... >\n   -> 'event': StateChanged (DeviceX) .",
+  "thread_id": "on_off_state_transition_rules",
+  "modeling_framework": "Les"
+}

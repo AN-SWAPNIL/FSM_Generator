@@ -1,0 +1,47 @@
+# Matter Cluster FSM Generator Requirements
+# Based on formal verification approaches from USENIX Security papers
+
+# Core LangChain components
+langchain==0.3.10
+langchain-community==0.3.10
+langchain-ollama==0.2.2
+
+# Vector storage and embeddings
+faiss-cpu==1.9.0
+sentence-transformers==3.3.1
+
+# Document processing
+unstructured[html]==0.18.9
+beautifulsoup4==4.12.3
+lxml==5.3.0
+
+# Graph analysis for FSM validation
+networkx==3.4.2
+
+# Data handling
+pandas==2.2.3
+numpy==2.2.1
+
+# Visualization
+matplotlib==3.10.0
+graphviz==0.20.3
+
+# CLI interface
+rich==13.9.4
+click==8.1.7
+
+# Development and testing
+pytest==8.3.4
+pytest-cov==6.0.0
+black==24.10.0
+isort==5.13.2
+
+# Logging and monitoring
+loguru==0.7.2
+
+# JSON schema validation
+jsonschema==4.23.0
+
+# Optional: For advanced formal verification (if available)
+# pysmt==0.9.5
+# z3-solver==4.12.6.0

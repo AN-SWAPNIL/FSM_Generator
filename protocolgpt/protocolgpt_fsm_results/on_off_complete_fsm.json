@@ -1,0 +1,9 @@
+{
+  "cluster_name": "on_off",
+  "cluster_id": "0x0006",
+  "query_type": "complete_fsm",
+  "answer": "I don't know. The provided text does not contain information about the On/Off cluster or its Finite State Machine (FSM). It appears to be a general description of clusters, events, and interactions in a data model, but it does not provide specific details about the On/Off cluster.",
+  "raw_response": {
+    "question": "\nCLUSTER ANALYSIS: On/Off (0x0006)\nCategory: lighting\nDescription: Basic on/off functionality for devices\nAttributes: OnOff, GlobalSceneControl, OnTime, OffWaitTime\nCommands: Off, On, Toggle\nEvents: StateChanged\n\n\nGenerate a complete Finite State Machine (FSM) for the On/Off cluster following this structure:\n\n1. Extract all states for the cluster\n2. Extract all message types for the cluster  \n3. Define all state transitions with triggering messages\n\nThe FSM should be a comprehensive model showing:\n- Initial states\n- All possible states the device can be in\n- All messages that can be received/sent\n- All state transitions triggered by messages\n- Final/terminal states if any\n\nDesired format:\n{\n    \"cluster_name\": \"On/Off\",\n    \"cluster_id\": \"0x0006\",\n    \"states\": [\"state1\", \"state2\", ...],\n    \"messages\": [\"message1\", \"message2\", ...],\n    \"initial_states\": [\"initial_state\"],\n    \"final_states\": [\"final_state\"],\n    \"transitions\": {\n        \"state1\": [\n            {\"receive_message\": \"message1\", \"next_state\": \"state2\"},\n            {\"receive_message\": \"message2\", \"next_state\": \"state3\"}\n        ],\n        \"state2\": [\n            {\"receive_message\": \"message3\", \"next_state\": \"state1\"}\n        ]\n    }\n}",
+    "chat_history": [
+      

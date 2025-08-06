@@ -1,0 +1,14 @@
+*** Variable declarations
+vars DeviceX : Device .
+vars UserY : User .
+vars StateA StateB : State .
+*** State-transition rules for On/Off
+eq < DeviceX |'attribute': StateA , ... >
+-> < DeviceX |'attribute': StateB , ... > .
+eq < DeviceX |'attribute': StateB , ... >
+-> < DeviceX |'attribute': StateA , ... > .
+*** Event generation rules for On/Off
+eq < DeviceX |'attribute': StateA , ... >
+-> 'event': StateChanged (DeviceX) .
+eq < DeviceX |'attribute': StateB , ... >
+-> 'event': StateChanged (DeviceX) .
