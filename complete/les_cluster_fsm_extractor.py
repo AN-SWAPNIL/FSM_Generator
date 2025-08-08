@@ -109,7 +109,7 @@ class MatterClusterLesFSMExtractor:
         print(f"🤖 Initializing {self.model_name}...")
         self.llm = ChatOllama(
             model=self.model_name,
-            temperature=0.1,  # Low for consistent formal logic
+            temperature=0,  # Low for consistent formal logic
             num_predict=4096
         )
         print("✅ Language model initialized")
