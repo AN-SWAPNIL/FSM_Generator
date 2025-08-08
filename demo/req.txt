@@ -1,0 +1,13 @@
+# Core dependencies
+pip install langchain langgraph langchain-community
+pip install beautifulsoup4 lxml
+pip install faiss-cpu  # For vector store
+pip install langchain-huggingface  # For embeddings
+pip install sentence-transformers  # Required by HuggingFace embeddings
+
+# Optional but recommended for better performance
+pip install tiktoken  # For token counting
+
+pip install unstructured
+
+pip install langchain-core
