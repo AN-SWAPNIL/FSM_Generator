@@ -11,6 +11,16 @@ GEMINI_MODEL = "gemini-1.5-flash"
 GEMINI_TEMPERATURE = 0.1
 GEMINI_MAX_OUTPUT_TOKENS = 8192
 
+# Enhanced LLM Configuration for technical extraction
+GEMINI_TOP_P = 0.95
+GEMINI_TOP_K = 40
+GEMINI_SAFETY_SETTINGS = {
+    "HARM_CATEGORY_HARASSMENT": "BLOCK_NONE",
+    "HARM_CATEGORY_HATE_SPEECH": "BLOCK_NONE", 
+    "HARM_CATEGORY_SEXUALLY_EXPLICIT": "BLOCK_NONE",
+    "HARM_CATEGORY_DANGEROUS_CONTENT": "BLOCK_NONE"
+}
+
 # PDF Processing Configuration
 PDF_FILENAME = "Matter-1.4-Application-Cluster-Specification.pdf"
 PDF_PATH = os.path.join(os.path.dirname(__file__), "..", PDF_FILENAME)
@@ -223,29 +233,40 @@ Find ALL cluster entries and return them in the required JSON format.
 
 # Detailed Cluster Information Extraction Configuration
 CLUSTER_DETAIL_EXTRACTION_PROMPT = """
-You are extracting detailed technical information from a Matter protocol cluster specification.
+You are an expert technical specification analyzer extracting detailed information from Matter protocol cluster specifications.
 
 TASK: Extract ALL available information from the cluster specification and return ONLY valid JSON.
 
-IMPORTANT TABLE EXTRACTION RULES:
-- Find ALL tables in the specification, especially:
-  - Attributes tables (usually section X.Y.6 with columns: ID, Name, Type, Constraint, Quality, Default, Access, Conformance)
-  - Commands tables (usually section X.Y.7 with columns: ID, Name, Direction, Response, Access, Conformance)
-  - Data Types tables with enumeration values
-  - Features tables with bit mappings
-- Extract EVERY row from each table
-- Look for multi-page tables that continue across pages
-- Include ALL command fields and their details
+CRITICAL TABLE EXTRACTION RULES:
+1. SCAN THE ENTIRE TEXT - tables may appear anywhere, not just at the beginning
+2. FIND ALL TABLES with these typical headers:
+   - ATTRIBUTES: "ID | Name | Type | Constraint | Quality | Default | Access | Conformance"
+   - COMMANDS: "ID | Name | Direction | Response | Access | Conformance"
+   - DATA TYPES: enumeration tables with "Value | Name | Summary | Conformance"
+   - COMMAND FIELDS: "ID | Name | Type | Constraint | Quality | Default | Conformance"
+3. EXTRACT EVERY ROW from each table - do not stop after a few entries
+4. Look for multi-page table continuations
+5. Pay special attention to command specifications with data fields
+
+SPECIFIC EXTRACTION TARGETS:
+- Complete attributes table (usually section X.Y.6)
+- Complete commands table (usually section X.Y.7) 
+- Command field specifications (sub-sections under commands)
+- All data type enumerations with values
+- Features table with bit mappings
+- Classification information (Hierarchy, Role, Scope, PICS Code)
+- Revision history table
+- Effect descriptions for commands ("Effect on Receipt" sections)
 
 REQUIRED JSON FORMAT:
 {{
   "cluster_info": {{
     "cluster_name": "exact cluster name",
-    "cluster_id": "hex ID (e.g., '0x0003')",
+    "cluster_id": "hex ID (e.g., '0x0006')",
     "classification": {{
-      "hierarchy": "hierarchy type",
-      "role": "role type", 
-      "scope": "scope type",
+      "hierarchy": "Base/Derived",
+      "role": "Application/Utility", 
+      "scope": "Endpoint/Node",
       "pics_code": "PICS code"
     }},
     "revision_history": [
@@ -266,39 +287,39 @@ REQUIRED JSON FORMAT:
     "data_types": [
       {{
         "name": "data type name",
-        "base_type": "base data type",
+        "base_type": "map8/enum8/uint16/etc",
         "values": [
           {{
             "value": "hex or numeric value",
             "name": "value name",
             "summary": "value description",
-            "conformance": "conformance requirement"
+            "conformance": "M/O/etc"
           }}
         ]
       }}
     ],
     "attributes": [
       {{
-        "id": "attribute ID",
+        "id": "attribute hex ID",
         "name": "attribute name",
         "type": "data type",
         "constraint": "constraints",
-        "quality": "quality flags",
+        "quality": "quality flags (SN/XN/etc)",
         "default": "default value",
-        "access": "access permissions",
-        "conformance": "conformance requirement",
-        "summary": "attribute description"
+        "access": "access permissions (R/RW/etc)",
+        "conformance": "M/O/LT/etc",
+        "summary": "detailed attribute description"
       }}
     ],
     "commands": [
       {{
-        "id": "command ID",
+        "id": "command hex ID",
         "name": "command name",
-        "direction": "direction (client->server or server->client)",
-        "response": "response command",
+        "direction": "client => server",
+        "response": "Y/N",
         "access": "access permissions",
-        "conformance": "conformance requirement",
-        "summary": "command description",
+        "conformance": "M/O/LT/!OFFONLY/etc",
+        "summary": "command description including effect on receipt",
         "fields": [
           {{
             "id": "field ID",
@@ -307,31 +328,42 @@ REQUIRED JSON FORMAT:
             "constraint": "constraints",
             "quality": "quality flags",
             "default": "default value",
-            "conformance": "conformance requirement"
+            "conformance": "M/O/etc",
+            "summary": "field description"
           }}
         ]
       }}
     ],
     "events": [
       {{
-        "id": "event ID",
+        "id": "event hex ID",
         "name": "event name",
         "priority": "event priority",
         "access": "access permissions",
-        "conformance": "conformance requirement"
+        "conformance": "M/O/etc",
+        "summary": "event description"
       }}
     ]
   }}
 }}
 
-CRITICAL INSTRUCTIONS:
-1. Extract ALL sections present in the cluster specification
-2. Return ONLY valid JSON with NO explanatory text
-3. Use empty arrays [] ONLY if sections are truly not present in the specification
-4. Preserve exact naming and formatting from the specification
-5. Include all technical details like IDs, types, constraints, etc.
-6. Pay special attention to tabular data - extract ALL rows
-7. Look for continuation of tables across multiple pages
+CRITICAL EXTRACTION INSTRUCTIONS:
+1. Return ONLY valid JSON with NO explanatory text, markdown, or code blocks
+2. Use empty arrays [] ONLY if sections are completely absent from the specification
+3. Preserve exact naming, IDs, and formatting from the specification
+4. Include ALL technical details: IDs, types, constraints, defaults, access, conformance
+5. For commands with complex behavior, include the "Effect on Receipt" descriptions
+6. Look for command field tables within command descriptions
+7. Extract ALL enumeration values for data types
+8. Find scene table extensions if mentioned
+9. Include state machine information if present
+
+VALIDATION CHECKS:
+- Attributes should have hex IDs starting with 0x
+- Commands should have hex IDs and direction information  
+- Data types should have enumeration values if they are enums
+- All conformance fields should use standard codes (M, O, LT, etc.)
+- Complex commands should have field specifications
 
 Extract from the provided cluster specification text and return valid JSON only.
 """
