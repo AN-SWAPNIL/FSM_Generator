@@ -2,7 +2,7 @@
   "extraction_info": {
     "total_clusters": 74,
     "pdf_source": "..\\Matter-1.4-Application-Cluster-Specification.pdf",
-    "extraction_timestamp": "2025-08-09T14:25:04.227621"
+    "extraction_timestamp": "2025-08-09T14:40:35.930840"
   },
   "clusters": [
     {
@@ -5773,6 +5773,2244 @@
         "text_length": 8415,
         "section_number": "6.12",
         "category": "Media"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Content Control",
+        "cluster_id": "0x050F",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "CONCON"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "ST",
+            "name": "ScreenTime",
+            "summary": "Supports managing screen time limits.",
+            "conformance": null
+          },
+          {
+            "bit": "1",
+            "code": "PM",
+            "name": "PINManagement",
+            "summary": "Supports managing a PIN code which is used for restricting access to configuration of this feature.",
+            "conformance": null
+          },
+          {
+            "bit": "2",
+            "code": "BU",
+            "name": null,
+            "summary": null,
+            "conformance": null
+          }
+        ],
+        "data_types": [],
+        "attributes": [
+          {
+            "id": "0",
+            "name": "Status",
+            "type": "StatusEnum",
+            "constraint": "all",
+            "quality": "M",
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": "1",
+            "name": "Data",
+            "type": "string",
+            "constraint": "max 500",
+            "quality": "O",
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": "2",
+            "name": "EncodingHint",
+            "type": "string",
+            "constraint": "max 100",
+            "quality": "O",
+            "default": null,
+            "access": null,
+            "conformance": null
+          }
+        ],
+        "commands": [
+          {
+            "id": null,
+            "name": "ChangePIN",
+            "direction": null,
+            "response": null,
+            "access": null,
+            "conformance": null,
+            "fields": [
+              {
+                "id": "0",
+                "name": "OldPIN",
+                "type": "string",
+                "constraint": "max 6",
+                "quality": "M",
+                "default": null,
+                "conformance": null
+              },
+              {
+                "id": "1",
+                "name": "NewPIN",
+                "type": "string",
+                "constraint": "max 6",
+                "quality": "M",
+                "default": null,
+                "conformance": null
+              }
+            ]
+          }
+        ],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "548-567",
+        "extraction_method": "RAG",
+        "text_length": 36408,
+        "section_number": "6.13",
+        "category": "Media"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "RVC Run Mode",
+        "cluster_id": "0x0054",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "RVCRUNM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Add constraint about switching from non-Idle to non-Idle modes. ChangeToModeResponse command: StatusText must be provided for InvalidInMode status. Deprecate the OnMode attribute and the related feature map bit. Add the Mapping mode tag."
+          },
+          {
+            "revision": "3",
+            "description": "Remove constraint on changing cleaning modes while the RVC Run Mode cluster is in a non-Idle mode. Continue to allow InvalidInMode response for devices that do not support such mode changes."
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "DEPONOFF",
+            "name": "OnOff",
+            "summary": "Dependency with the OnOff cluster",
+            "conformance": "X"
+          }
+        ],
+        "data_types": [],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "567-571",
+        "extraction_method": "RAG",
+        "text_length": 9111,
+        "section_number": "7.2",
+        "category": "Robots"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "RVC Clean Mode",
+        "cluster_id": "0x0055",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "RVCCLEANM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Add constraint about changing cleaning modes while the RVC Run Mode cluster is in a non-Idle mode. ChangeToModeResponse command: StatusText must be provided for InvalidInMode status. Deprecate the OnMode attribute and the related feature map bit."
+          },
+          {
+            "revision": "3",
+            "description": "Remove constraint on changing cleaning modes while the RVC Run Mode cluster is in a non-Idle mode. Continue to allow InvalidInMode response for devices that do not support such mode changes."
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "DEPONOFF",
+            "name": "OnOff",
+            "summary": "Dependency with the OnOff cluster",
+            "conformance": "X"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "ModeOptionStruct",
+            "base_type": null,
+            "values": [
+              {
+                "value": "0",
+                "name": "Label",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "1",
+                "name": "Mode",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "2",
+                "name": "ModeTags",
+                "summary": "1 to 8",
+                "conformance": null
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": "X",
+            "conformance": null
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          }
+        ],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "571-574",
+        "extraction_method": "RAG",
+        "text_length": 8349,
+        "section_number": "7.3",
+        "category": "Robots"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "RVC Operational State",
+        "cluster_id": "0x0061",
+        "classification": {
+          "hierarchy": "Application",
+          "role": "Endpoint",
+          "scope": "RVCOPSTATE",
+          "pics_code": null
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "The Pause and Resume commands are usable in all compatible states. Deprecate the Start and Stop commands. Add the GoHome command."
+          }
+        ],
+        "features": [],
+        "data_types": [
+          {
+            "name": "OperationalStateEnum",
+            "base_type": "enum8",
+            "values": [
+              {
+                "value": "0x00",
+                "name": "Stopped",
+                "summary": "The device is stopped",
+                "conformance": "M"
+              },
+              {
+                "value": "0x01",
+                "name": "Running",
+                "summary": "The device is operating",
+                "conformance": "M"
+              },
+              {
+                "value": "0x02",
+                "name": "Paused",
+                "summary": "The device is paused during an operation",
+                "conformance": "M"
+              },
+              {
+                "value": "0x03",
+                "name": "Error",
+                "summary": "The device is in an error state",
+                "conformance": "M"
+              },
+              {
+                "value": "0x40",
+                "name": "SeekingCharger",
+                "summary": "The device is en route to the charging dock",
+                "conformance": "M"
+              },
+              {
+                "value": "0x41",
+                "name": "Charging",
+                "summary": "The device is charging",
+                "conformance": "M"
+              },
+              {
+                "value": "0x42",
+                "name": "Docked",
+                "summary": "The device is on the dock, not charging",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "574-579",
+        "extraction_method": "RAG",
+        "text_length": 11117,
+        "section_number": "7.4",
+        "category": "Robots"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Temperature Control",
+        "cluster_id": "0x0056",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "TCTL"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "TN",
+            "name": "TemperatureNumber",
+            "summary": "Use actual temperature numbers",
+            "conformance": "O.a"
+          },
+          {
+            "bit": "1",
+            "code": "TL",
+            "name": "TemperatureLevel",
+            "summary": "Use temperature levels",
+            "conformance": "O.a"
+          },
+          {
+            "bit": "2",
+            "code": "STEP",
+            "name": "TemperatureStep",
+            "summary": "Use step control with temperature numbers",
+            "conformance": "[TN]"
+          }
+        ],
+        "data_types": [],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "580-584",
+        "extraction_method": "RAG",
+        "text_length": 12426,
+        "section_number": "8.2",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Dishwasher Mode",
+        "cluster_id": "0x0059",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "DISHM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "ChangeToModeResponse command: StatusText must be provided for InvalidInMode status"
+          },
+          {
+            "revision": "3",
+            "description": "Set OnOff feature as disallowed (previously a Device Type override), Set StartUpMode and OnMode as disallowed (previously provisional)"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "DEPONOFF",
+            "name": "OnOff",
+            "summary": "Dependency with the OnOff cluster",
+            "conformance": "X"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "ModeOptionStruct",
+            "base_type": null,
+            "values": [
+              {
+                "id": "0",
+                "name": "Label",
+                "type": "M",
+                "constraint": null,
+                "quality": null,
+                "default": null,
+                "access": null,
+                "conformance": null
+              },
+              {
+                "id": "1",
+                "name": "Mode",
+                "type": "M",
+                "constraint": null,
+                "quality": null,
+                "default": null,
+                "access": null,
+                "conformance": null
+              },
+              {
+                "id": "2",
+                "name": "ModeTags",
+                "type": null,
+                "constraint": "1 to 8",
+                "quality": "M",
+                "default": null,
+                "access": null,
+                "conformance": null
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "type": "M",
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "type": "M",
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": "X"
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": "X"
+          }
+        ],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "584-586",
+        "extraction_method": "RAG",
+        "text_length": 8000,
+        "section_number": "8.3",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Dishwasher Alarm",
+        "cluster_id": "0x005D",
+        "classification": {
+          "hierarchy": "Alarm Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "DISHALM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [],
+        "data_types": [
+          {
+            "name": "AlarmBitmap",
+            "base_type": "map32",
+            "values": [
+              {
+                "value": "0",
+                "name": "InflowError",
+                "summary": "Water inflow is abnormal",
+                "conformance": "P, O.a+"
+              },
+              {
+                "value": "1",
+                "name": "DrainError",
+                "summary": "Water draining is abnormal",
+                "conformance": "P, O.a+"
+              },
+              {
+                "value": "2",
+                "name": "DoorError",
+                "summary": "Door or door lock is abnormal",
+                "conformance": "O.a+"
+              },
+              {
+                "value": "3",
+                "name": "TempTooLow",
+                "summary": "Unable to reach normal temperature",
+                "conformance": "P, O.a+"
+              },
+              {
+                "value": "4",
+                "name": "TempTooHigh",
+                "summary": "Temperature is too high",
+                "conformance": "P, O.a+"
+              },
+              {
+                "value": "5",
+                "name": "WaterLevelError",
+                "summary": "Water level is abnormal",
+                "conformance": "P, O.a+"
+              }
+            ]
+          }
+        ],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "586-587",
+        "extraction_method": "RAG",
+        "text_length": 4483,
+        "section_number": "8.4",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Laundry Washer Mode",
+        "cluster_id": "0x0051",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "LWM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Updated Feature Map Conformance"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "DEPONOFF",
+            "name": "OnOff",
+            "summary": "Dependency with the OnOff cluster",
+            "conformance": "X"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "ModeOptionStruct",
+            "base_type": null,
+            "values": []
+          }
+        ],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "587-590",
+        "extraction_method": "RAG",
+        "text_length": 7181,
+        "section_number": "8.5",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Laundry Washer Controls",
+        "cluster_id": "0x0053",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "WASHERCTRL"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Updated Feature Map Conformance"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "SPIN",
+            "name": "Spin",
+            "summary": "Multiple spin speeds supported",
+            "conformance": "O.a+"
+          },
+          {
+            "bit": "1",
+            "code": "RINSE",
+            "name": "Rinse",
+            "summary": "Multiple rinse cycles supported",
+            "conformance": "O.a+"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "NumberOfRinsesEnum",
+            "base_type": "enum8",
+            "values": []
+          }
+        ],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "590-593",
+        "extraction_method": "RAG",
+        "text_length": 8687,
+        "section_number": "8.6",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Refrigerator And Temperature Controlled Cabinet Mode",
+        "cluster_id": "0x0052",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "TCCM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "ChangeToModeResponse command: StatusText must be provided for InvalidInMode status"
+          },
+          {
+            "revision": "3",
+            "description": "Set OnOff feature, StartUpMode, and OnMode as disallowed (previously a Device Type override)"
+          }
+        ],
+        "features": [],
+        "data_types": [],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "593-595",
+        "extraction_method": "RAG",
+        "text_length": 7347,
+        "section_number": "8.7",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Refrigerator Alarm",
+        "cluster_id": "0x0057",
+        "classification": {
+          "hierarchy": "Alarm Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "REFALM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "RESET",
+            "name": "Reset",
+            "summary": "Supports the ability to reset alarms",
+            "conformance": "X"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "AlarmBitmap",
+            "base_type": "map32",
+            "values": [
+              {
+                "value": "0",
+                "name": "DoorOpen",
+                "summary": "The cabinet’s door has been open for a vendor defined amount of time.",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0",
+            "name": "DoorOpen",
+            "type": "bool",
+            "constraint": "If the generation of the alarm has not been suppressed at the device itself, then this attribute SHALL have these fixed values. If the generation of the alarm is suppressed at the device itself, then bit 0 SHALL have a value of 0. It SHALL be re-set to 1 if the alarm is re-enabled at the device itself.",
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          }
+        ],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "595-597",
+        "extraction_method": "RAG",
+        "text_length": 6657,
+        "section_number": "8.8",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Laundry Dryer Controls",
+        "cluster_id": "0x004A",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "DRYERCTRL"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [],
+        "data_types": [
+          {
+            "name": "DrynessLevelEnum",
+            "base_type": "enum8",
+            "values": [
+              {
+                "value": "0",
+                "name": "Low",
+                "summary": "Provides a low dryness level for the selected mode",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": null,
+            "name": "SelectedDrynessLevel",
+            "type": null,
+            "constraint": "If an attempt is made to write this attribute with a value other than null or a value contained in SupportedDrynessLevels, a CONSTRAINT_ERROR response SHALL be sent as the response. If an attempt is made to write this attribute while the device is not in a state that supports modifying the dryness level, an INVALID_IN_STATE error SHALL be sent as the response. A value of null SHALL indicate that there will be no dryness level setting for the current mode.",
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x01",
+            "name": "ModifyEnabledAlarms",
+            "direction": "X",
+            "response": null,
+            "access": null,
+            "conformance": null,
+            "fields": []
+          }
+        ],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "597-598",
+        "extraction_method": "RAG",
+        "text_length": 5579,
+        "section_number": "8.9",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Oven Cavity Operational State",
+        "cluster_id": "0x0048",
+        "classification": {
+          "hierarchy": "Operational State",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "OVENOPSTATE"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Set Pause and Resume commands as disallowed (previously a Device Type override)"
+          }
+        ],
+        "features": [],
+        "data_types": [],
+        "attributes": [
+          {
+            "id": null,
+            "name": "PhaseList",
+            "type": null,
+            "constraint": "For this derived cluster, only these pre-defined strings may be used in the PhaseList attribute: \"pre-heating\", \"pre-heated\", and \"cooling down\". Other values SHALL NOT be used.",
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x04",
+            "name": "Operational CommandResponse",
+            "direction": null,
+            "response": null,
+            "access": null,
+            "conformance": null,
+            "fields": []
+          }
+        ],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "598-600",
+        "extraction_method": "RAG",
+        "text_length": 6702,
+        "section_number": "8.10",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Oven Mode",
+        "cluster_id": "0x0049",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "OTCCM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Set OnOff feature, StartUpMode, and OnMode as disallowed (previously a Device Type override)"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "DEPONOFF",
+            "name": "OnOff",
+            "summary": "Dependency with the OnOff cluster",
+            "conformance": "X"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "ModeOptionStruct Type",
+            "base_type": null,
+            "values": []
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": "M",
+            "conformance": null
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": "M",
+            "conformance": null
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": "X",
+            "conformance": null
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": "X",
+            "conformance": null
+          }
+        ],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "600-603",
+        "extraction_method": "RAG",
+        "text_length": 7372,
+        "section_number": "8.11",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Microwave Oven Mode",
+        "cluster_id": "0x005E",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "MWOM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Set OnOff feature as disallowed"
+          }
+        ],
+        "features": [],
+        "data_types": [
+          {
+            "name": "Mode Tag Value",
+            "base_type": "uint16",
+            "values": [
+              {
+                "value": "0x0002",
+                "name": "Quiet",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0003",
+                "name": "LowNoise",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0004",
+                "name": "LowEnergy",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0005",
+                "name": "Vacation",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0006",
+                "name": "Min",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0007",
+                "name": "Max",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0008",
+                "name": "Night",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0009",
+                "name": "Day",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x4000",
+                "name": "Normal",
+                "summary": "This is the normal mode of operation for general cooking of food.",
+                "conformance": null
+              },
+              {
+                "value": "0x4001",
+                "name": "Defrost",
+                "summary": "This is a mode optimized for defrosting food.",
+                "conformance": null
+              }
+            ]
+          }
+        ],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "603-605",
+        "extraction_method": "RAG",
+        "text_length": 6123,
+        "section_number": "8.12",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Microwave Oven Control",
+        "cluster_id": "0x005F",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "MWOCTRL"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "PWRNUM",
+            "name": "PowerAsNumber",
+            "summary": "Power is specified as a unitless number or a percentage",
+            "conformance": "O.a"
+          },
+          {
+            "bit": "1",
+            "code": "WATTS",
+            "name": "PowerInWatts",
+            "summary": "Power is specified in Watts",
+            "conformance": "P, O.a"
+          },
+          {
+            "bit": "2",
+            "code": "PWRLMTS",
+            "name": "PowerNumberLimits",
+            "summary": "Supports the limit attributes used with the PWRNUM feature",
+            "conformance": "[PWRNUM]"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "Mode Tag",
+            "base_type": "uint8",
+            "values": [
+              {
+                "value": "0x0002",
+                "name": "Quiet",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0003",
+                "name": "LowNoise",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0004",
+                "name": "LowEnergy",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0005",
+                "name": "Vacation",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0006",
+                "name": "Min",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0007",
+                "name": "Max",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0008",
+                "name": "Night",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0009",
+                "name": "Day",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x4000",
+                "name": "Normal",
+                "summary": "This is the normal mode of operation for general cooking of food.",
+                "conformance": null
+              },
+              {
+                "value": "0x4001",
+                "name": "Defrost",
+                "summary": "This is a mode optimized for defrosting food.",
+                "conformance": null
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "CookTime",
+            "type": "elapsed-s",
+            "constraint": "1 to MaxCookTime",
+            "quality": "R V",
+            "default": "30",
+            "access": "M",
+            "conformance": null
+          },
+          {
+            "id": "0x0001",
+            "name": "MaxCookTime",
+            "type": "elapsed-s",
+            "constraint": "1 to 86400",
+            "quality": "F",
+            "default": null,
+            "access": "MS R V",
+            "conformance": "M"
+          },
+          {
+            "id": "0x0002",
+            "name": "PowerSetting",
+            "type": "uint8",
+            "constraint": "desc",
+            "quality": "desc",
+            "default": null,
+            "access": "R V",
+            "conformance": "PWRNUM"
+          },
+          {
+            "id": "0x0003",
+            "name": "MinPower",
+            "type": "uint8",
+            "constraint": "1 to 99",
+            "quality": "F",
+            "default": "10",
+            "access": "R V",
+            "conformance": "PWRLMTS"
+          },
+          {
+            "id": "0x0004",
+            "name": "MaxPower",
+            "type": "uint8",
+            "constraint": "(MinPower + 1) to 100",
+            "quality": "F",
+            "default": "100",
+            "access": "R V",
+            "conformance": "PWRLMTS"
+          },
+          {
+            "id": "0x0005",
+            "name": "PowerStep",
+            "type": "uint8",
+            "constraint": "desc",
+            "quality": "F",
+            "default": "10",
+            "access": "R V",
+            "conformance": "PWRLMTS"
+          },
+          {
+            "id": "0x0006",
+            "name": "SupportedWatts",
+            "type": "list[uint16]",
+            "constraint": "1 to 10",
+            "quality": "F",
+            "default": null,
+            "access": "MS R V",
+            "conformance": "P, WATTS"
+          },
+          {
+            "id": "0x0007",
+            "name": "SelectedWattIndex",
+            "type": "uint8",
+            "constraint": "desc",
+            "quality": "MS",
+            "default": null,
+            "access": "R V",
+            "conformance": "P, WATTS"
+          },
+          {
+            "id": "0x0008",
+            "name": "WattRating",
+            "type": "uint16",
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": "O"
+          },
+          {
+            "id": "4",
+            "name": "StartAfterSetting",
+            "type": "bool",
+            "constraint": "all",
+            "quality": null,
+            "default": "false",
+            "access": null,
+            "conformance": "O"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "SetCookingParameters",
+            "direction": "client => server",
+            "response": "Y",
+            "access": "O",
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "CookMode",
+                "type": "uint8",
+                "constraint": "desc",
+                "quality": "desc",
+                "default": null,
+                "conformance": "O.b+"
+              },
+              {
+                "id": "1",
+                "name": "CookTime",
+                "type": "elapsed-s",
+                "constraint": "1 to MaxCookTime",
+                "quality": null,
+                "default": "30",
+                "conformance": "O.b+"
+              },
+              {
+                "id": "2",
+                "name": "PowerSetting",
+                "type": "uint8",
+                "constraint": "MinPower to MaxPower",
+                "quality": null,
+                "default": "MaxPower",
+                "conformance": "[PWRNUM].b+"
+              },
+              {
+                "id": "3",
+                "name": "WattSettingIndex",
+                "type": "uint8",
+                "constraint": "desc",
+                "quality": "MS",
+                "default": null,
+                "conformance": "[WATTS].b+"
+              }
+            ]
+          },
+          {
+            "id": "0x01",
+            "name": "AddMoreTime",
+            "direction": "client => server",
+            "response": "Y",
+            "access": "O",
+            "conformance": "O",
+            "fields": []
+          }
+        ],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "605-613",
+        "extraction_method": "RAG",
+        "text_length": 16390,
+        "section_number": "8.13",
+        "category": "Home Appliances"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Device Energy Management",
+        "cluster_id": "0x0098",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "DEM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Updates after 0.7 Ballot review"
+          },
+          {
+            "revision": "3",
+            "description": "Updates to match cluster spec updates"
+          },
+          {
+            "revision": "4",
+            "description": "Updates to feature conformance. Corrected ForecastID type"
+          }
+        ],
+        "features": [],
+        "data_types": [],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "613-650",
+        "extraction_method": "RAG",
+        "text_length": 79678,
+        "section_number": "9.2",
+        "category": "Energy Management"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Energy EVSE",
+        "cluster_id": "0x0099",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "EEVSE"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Updates after 0.7 Ballot review"
+          },
+          {
+            "revision": "3",
+            "description": "Added Q quality for SessionDuration, SessionEnergyCharged and SessionEnergyDischarged. Updates to V2X and associated areas. Make PREF mandatory."
+          }
+        ],
+        "features": [],
+        "data_types": [],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "650-677",
+        "extraction_method": "RAG",
+        "text_length": 58589,
+        "section_number": "9.3",
+        "category": "Energy Management"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Energy EVSE Mode",
+        "cluster_id": "0x009D",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "EEVSEM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Disallowed DEPONOFF feature and OnMode and StartUpMode attributes"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "DEPONOFF",
+            "name": "OnOff",
+            "summary": "Dependency with the OnOff cluster",
+            "conformance": "X"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "ModeOptionStruct",
+            "base_type": null,
+            "values": [
+              {
+                "value": "0",
+                "name": "Label",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "1",
+                "name": "Mode",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "2",
+                "name": "ModeTags",
+                "summary": null,
+                "conformance": null
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": "0x0002",
+            "name": "StartUpMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": "X"
+          },
+          {
+            "id": "0x0003",
+            "name": "OnMode",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": "X"
+          }
+        ],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "677-680",
+        "extraction_method": "RAG",
+        "text_length": 9032,
+        "section_number": "9.4",
+        "category": "Energy Management"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Water Heater Management",
+        "cluster_id": "0x0094",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "EWATERHTR"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Added events and simplified data types"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "EM",
+            "name": "EnergyManagement",
+            "summary": "Allows energy management control of the tank",
+            "conformance": "O"
+          },
+          {
+            "bit": "1",
+            "code": "TP",
+            "name": "TankPercent",
+            "summary": "Supports monitoring the percentage of hot water in the tank",
+            "conformance": "O"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "WaterHeaterHeatSourceBitmap",
+            "base_type": "map8",
+            "values": [
+              {
+                "value": "0",
+                "name": "ImmersionElement1",
+                "summary": "Immersion Heating Element 1",
+                "conformance": "M"
+              },
+              {
+                "value": "1",
+                "name": "ImmersionElement2",
+                "summary": "Immersion Heating Element 2",
+                "conformance": "M"
+              },
+              {
+                "value": "2",
+                "name": "HeatPump",
+                "summary": "Heat pump Heating",
+                "conformance": "M"
+              },
+              {
+                "value": "3",
+                "name": "Boiler",
+                "summary": "Boiler Heating (e.g. Gas or Oil)",
+                "conformance": "M"
+              },
+              {
+                "value": "4",
+                "name": "Other",
+                "summary": "Other Heating",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "attributes": [],
+        "commands": [],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "BoostStarted",
+            "priority": "INFO",
+            "access": "M",
+            "conformance": "M"
+          },
+          {
+            "id": "0x01",
+            "name": "BoostEnded",
+            "priority": "INFO",
+            "access": "M",
+            "conformance": "M"
+          }
+        ]
+      },
+      "metadata": {
+        "source_pages": "680-687",
+        "extraction_method": "RAG",
+        "text_length": 17094,
+        "section_number": "9.5",
+        "category": "Energy Management"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Water Heater Mode",
+        "cluster_id": "0x009E",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "WHM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "DEPONOFF",
+            "name": "OnOff",
+            "summary": "Dependency with the OnOff cluster",
+            "conformance": "X"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "ModeOptionStruct",
+            "base_type": null,
+            "values": [
+              {
+                "value": "0",
+                "name": "Label",
+                "summary": null,
+                "conformance": "M"
+              },
+              {
+                "value": "1",
+                "name": "Mode",
+                "summary": null,
+                "conformance": "M"
+              },
+              {
+                "value": "2",
+                "name": "ModeTags",
+                "summary": "1 to 8",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SupportedModes",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          }
+        ],
+        "commands": [],
+        "events": [
+          {
+            "id": "0x00",
+            "name": "BoostStarted",
+            "priority": "INFO",
+            "access": "M",
+            "conformance": null
+          },
+          {
+            "id": "0x01",
+            "name": "BoostEnded",
+            "priority": "INFO",
+            "access": "M",
+            "conformance": null
+          }
+        ]
+      },
+      "metadata": {
+        "source_pages": "687-690",
+        "extraction_method": "RAG",
+        "text_length": 9242,
+        "section_number": "9.6",
+        "category": "Energy Management"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Energy Preference",
+        "cluster_id": "0x009B",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "EPREF"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [],
+        "data_types": [],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "EnergyBalances",
+            "type": "list[BalanceStruct]",
+            "constraint": "2 to 10",
+            "quality": "R V",
+            "default": null,
+            "access": "F",
+            "conformance": "BALA"
+          },
+          {
+            "id": "0x0001",
+            "name": "CurrentEnergyBalance",
+            "type": "uint8",
+            "constraint": "all",
+            "quality": "RW VO",
+            "default": null,
+            "access": "N",
+            "conformance": "BALA"
+          },
+          {
+            "id": "0x0002",
+            "name": "EnergyPriorities",
+            "type": "list[EnergyPriorityEnum]",
+            "constraint": "2",
+            "quality": "R V",
+            "default": null,
+            "access": "F",
+            "conformance": "BALA"
+          },
+          {
+            "id": "0x0003",
+            "name": "LowPowerModeSensitivities",
+            "type": "list[BalanceStruct]",
+            "constraint": "2 to 10",
+            "quality": "R V",
+            "default": null,
+            "access": "F",
+            "conformance": "LPMS"
+          },
+          {
+            "id": "0x0004",
+            "name": "CurrentLowPowerModeSensitivity",
+            "type": "uint8",
+            "constraint": "all",
+            "quality": "RW VO",
+            "default": null,
+            "access": "N",
+            "conformance": "LPMS"
+          }
+        ],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "690-694",
+        "extraction_method": "RAG",
+        "text_length": 11600,
+        "section_number": "9.7",
+        "category": "Energy Management"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Device Energy Management Mode",
+        "cluster_id": "0x009F",
+        "classification": {
+          "hierarchy": "Mode Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "DEMM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          },
+          {
+            "revision": "2",
+            "description": "Disallowed DEPONOFF feature and OnMode and StartUpMode attributes"
+          }
+        ],
+        "features": [],
+        "data_types": [
+          {
+            "name": "ModeTag",
+            "base_type": "uint32",
+            "values": [
+              {
+                "value": "0x0000",
+                "name": "Auto",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0001",
+                "name": "Quick",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0002",
+                "name": "Quiet",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0003",
+                "name": "LowNoise",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0004",
+                "name": "LowEnergy",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0005",
+                "name": "Vacation",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0006",
+                "name": "Min",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0007",
+                "name": "Max",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0008",
+                "name": "Night",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x0009",
+                "name": "Day",
+                "summary": null,
+                "conformance": null
+              },
+              {
+                "value": "0x4000",
+                "name": "NoOptimization",
+                "summary": "The device prohibits optimization of energy usage management: its energy usage is determined only by the user configuration and internal device needs.",
+                "conformance": null
+              },
+              {
+                "value": "0x4001",
+                "name": "DeviceOptimization",
+                "summary": "The device is permitted to manage its own energy usage. For example, using tariff information it may obtain.",
+                "conformance": null
+              },
+              {
+                "value": "0x4002",
+                "name": "LocalOptimization",
+                "summary": "The device permits management of energy usage by an energy manager to optimize the local energy usage.",
+                "conformance": null
+              },
+              {
+                "value": "0x4003",
+                "name": "GridOptimization",
+                "summary": "The device permits management of energy usage by an energy manager to optimize the grid energy usage.",
+                "conformance": null
+              }
+            ]
+          }
+        ],
+        "attributes": [],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "694-699",
+        "extraction_method": "RAG",
+        "text_length": 12214,
+        "section_number": "9.8",
+        "category": "Energy Management"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Wi-Fi Network Management",
+        "cluster_id": "0x0451",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "WIFINM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [],
+        "data_types": [],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "SSID",
+            "type": "octstr",
+            "constraint": "1 to 32",
+            "quality": "XN",
+            "default": "null",
+            "access": "R V",
+            "conformance": "M"
+          },
+          {
+            "id": "0x0001",
+            "name": "PassphraseSurrogate",
+            "type": "uint64",
+            "constraint": "all",
+            "quality": "XN",
+            "default": "null",
+            "access": "R M",
+            "conformance": "M"
+          }
+        ],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "699-702",
+        "extraction_method": "RAG",
+        "text_length": 9096,
+        "section_number": "10.2",
+        "category": "Network Infrastructure"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Thread Border Router Management",
+        "cluster_id": "0x0452",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "TBRM"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "PC",
+            "name": "PANChange",
+            "summary": "The ability to\nchange PAN con­\nfiguration with\npending dataset\nsetting request.",
+            "conformance": "O"
+          }
+        ],
+        "data_types": [],
+        "attributes": [
+          {
+            "id": "0",
+            "name": "PendingDataset",
+            "type": "octstr",
+            "constraint": "max 254",
+            "quality": "M",
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": null,
+            "name": "BorderAgentID",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": null,
+            "name": "ThreadVersion",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": null,
+            "name": "InterfaceEnabled",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          }
+        ],
+        "commands": [
+          {
+            "id": null,
+            "name": "SetActiveDatasetRequest",
+            "direction": null,
+            "response": null,
+            "access": null,
+            "conformance": null,
+            "fields": [
+              {
+                "id": "0",
+                "name": "ActiveDataset",
+                "type": "octstr",
+                "constraint": "max 254",
+                "quality": "M",
+                "default": null,
+                "conformance": null
+              },
+              {
+                "id": "1",
+                "name": "Breadcrumb",
+                "type": "uint64",
+                "constraint": "all",
+                "quality": "O",
+                "default": null,
+                "conformance": null
+              }
+            ]
+          }
+        ],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "702-707",
+        "extraction_method": "RAG",
+        "text_length": 14461,
+        "section_number": "10.3",
+        "category": "Network Infrastructure"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Thread Network Directory",
+        "cluster_id": "0x0453",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "THNETDIR"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Initial revision"
+          }
+        ],
+        "features": [],
+        "data_types": [
+          {
+            "name": "ThreadNetworkStruct",
+            "base_type": null,
+            "values": []
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0",
+            "name": "PreferredNetwork",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": null,
+            "name": "ThreadNetworks",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          },
+          {
+            "id": null,
+            "name": "ThreadNetworkTableSize",
+            "type": null,
+            "constraint": null,
+            "quality": null,
+            "default": null,
+            "access": null,
+            "conformance": null
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "AddNetwork",
+            "direction": "client => server",
+            "response": "Y",
+            "access": "M",
+            "conformance": "T",
+            "fields": [
+              {
+                "id": "0",
+                "name": "PendingDataset",
+                "type": "octstr",
+                "constraint": "max 254",
+                "quality": "M",
+                "default": null,
+                "conformance": null
+              }
+            ]
+          },
+          {
+            "id": "0x01",
+            "name": "RemoveNetwork",
+            "direction": "client => server",
+            "response": "Y",
+            "access": "M",
+            "conformance": "T",
+            "fields": []
+          },
+          {
+            "id": null,
+            "name": "GetOperationalDataset",
+            "direction": null,
+            "response": null,
+            "access": null,
+            "conformance": null,
+            "fields": []
+          }
+        ],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "707-712",
+        "extraction_method": "RAG",
+        "text_length": 13956,
+        "section_number": "10.4",
+        "category": "Network Infrastructure"
       }
     }
   ]

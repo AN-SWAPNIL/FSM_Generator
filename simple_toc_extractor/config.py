@@ -6,7 +6,7 @@ Customize extraction parameters and settings here
 import os
 
 # API Configuration
-GOOGLE_API_KEY = 'AIzaSyAb_oS5Vgd6RWN1CHQjYifpcjrIZWP2k84'
+GOOGLE_API_KEY = 'AIzaSyDE-xI1A8ESXRd1G97F6nxhsqYgrlu6QNM'
 GEMINI_MODEL = "gemini-1.5-flash"
 GEMINI_TEMPERATURE = 0.1
 GEMINI_MAX_OUTPUT_TOKENS = 8192
