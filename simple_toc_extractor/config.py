@@ -227,6 +227,16 @@ You are extracting detailed technical information from a Matter protocol cluster
 
 TASK: Extract ALL available information from the cluster specification and return ONLY valid JSON.
 
+IMPORTANT TABLE EXTRACTION RULES:
+- Find ALL tables in the specification, especially:
+  - Attributes tables (usually section X.Y.6 with columns: ID, Name, Type, Constraint, Quality, Default, Access, Conformance)
+  - Commands tables (usually section X.Y.7 with columns: ID, Name, Direction, Response, Access, Conformance)
+  - Data Types tables with enumeration values
+  - Features tables with bit mappings
+- Extract EVERY row from each table
+- Look for multi-page tables that continue across pages
+- Include ALL command fields and their details
+
 REQUIRED JSON FORMAT:
 {{
   "cluster_info": {{
@@ -276,7 +286,8 @@ REQUIRED JSON FORMAT:
         "quality": "quality flags",
         "default": "default value",
         "access": "access permissions",
-        "conformance": "conformance requirement"
+        "conformance": "conformance requirement",
+        "summary": "attribute description"
       }}
     ],
     "commands": [
@@ -287,6 +298,7 @@ REQUIRED JSON FORMAT:
         "response": "response command",
         "access": "access permissions",
         "conformance": "conformance requirement",
+        "summary": "command description",
         "fields": [
           {{
             "id": "field ID",
@@ -315,9 +327,11 @@ REQUIRED JSON FORMAT:
 CRITICAL INSTRUCTIONS:
 1. Extract ALL sections present in the cluster specification
 2. Return ONLY valid JSON with NO explanatory text
-3. Use empty arrays [] for sections not present in the specification
+3. Use empty arrays [] ONLY if sections are truly not present in the specification
 4. Preserve exact naming and formatting from the specification
 5. Include all technical details like IDs, types, constraints, etc.
+6. Pay special attention to tabular data - extract ALL rows
+7. Look for continuation of tables across multiple pages
 
 Extract from the provided cluster specification text and return valid JSON only.
 """

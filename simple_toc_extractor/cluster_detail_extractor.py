@@ -187,10 +187,17 @@ class ClusterDetailExtractor:
             FAISS vector store or None if failed
         """
         try:
-            # Split text into chunks
+            # Create text splitter with better parameters for technical specifications
             text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=1000,
-                chunk_overlap=200,
+                chunk_size=1500,  # Increased chunk size for better table capture
+                chunk_overlap=300,  # More overlap to capture table continuations
+                separators=[
+                    "\n\n\n",  # Major section breaks
+                    "\n\n",    # Paragraph breaks
+                    "\n",      # Line breaks
+                    ".",       # Sentence breaks
+                    " ",       # Word breaks
+                ],
                 length_function=len
             )
             
@@ -224,17 +231,37 @@ class ClusterDetailExtractor:
             Extracted cluster information as dictionary
         """
         try:
-            # Create retriever
+            # Create retriever with more documents for complex content
             retriever = vector_store.as_retriever(
                 search_type="similarity",
-                search_kwargs={"k": 5}
+                search_kwargs={"k": 10}  # Increased to get more context
             )
             
-            # Retrieve relevant documents
-            docs = retriever.get_relevant_documents(f"cluster information for {cluster_name}")
+            # Retrieve multiple types of relevant documents
+            search_queries = [
+                f"cluster information for {cluster_name}",
+                f"attributes table {cluster_name}",
+                f"commands table {cluster_name}",
+                f"data types {cluster_name}",
+                f"features {cluster_name}",
+                f"classification hierarchy role scope {cluster_name}"
+            ]
+            
+            all_docs = []
+            for query in search_queries:
+                docs = retriever.get_relevant_documents(query)
+                all_docs.extend(docs)
+            
+            # Remove duplicates and combine context
+            unique_docs = []
+            seen_content = set()
+            for doc in all_docs:
+                if doc.page_content not in seen_content:
+                    unique_docs.append(doc)
+                    seen_content.add(doc.page_content)
             
             # Combine retrieved context
-            context = "\n\n".join([doc.page_content for doc in docs])
+            context = "\n\n".join([doc.page_content for doc in unique_docs])
             
             # Generate extraction prompt with retrieved context
             prompt = f"""{CLUSTER_DETAIL_EXTRACTION_PROMPT}
