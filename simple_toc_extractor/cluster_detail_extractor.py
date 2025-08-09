@@ -257,8 +257,13 @@ IMPORTANT: Look for these specific patterns in the text:
 5. Direction indicators like → or ⇒ for commands
 6. Conformance codes: M (Mandatory), O (Optional), F (Feature-dependent)
 
+SPECIAL ATTENTION: This cluster has {len(cluster_text)} characters of text. 
+Make sure to scan the ENTIRE text for Commands section, not just the beginning.
+Commands section typically appears after Data Types and Attributes sections.
+
 Cluster specification text:
-{cluster_text[:20000]}"""  # Increased from 8000 to 20000 characters
+{cluster_text}"""  # Remove character limit to process full text
+            
             
             # Extract with LLM
             response = self.llm.invoke(prompt)

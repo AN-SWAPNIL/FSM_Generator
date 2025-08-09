@@ -2,7 +2,7 @@
   "extraction_info": {
     "total_clusters": 3,
     "pdf_source": "..\\Matter-1.4-Application-Cluster-Specification.pdf",
-    "extraction_timestamp": "2025-08-09T12:57:15.367734"
+    "extraction_timestamp": "2025-08-09T13:37:00.535679"
   },
   "clusters": [
     {
@@ -142,9 +142,9 @@
             "name": "IdentifyTime",
             "type": "uint16",
             "constraint": "all",
-            "quality": null,
+            "quality": "RW VO",
             "default": "0",
-            "access": "RW VO",
+            "access": "RW",
             "conformance": "M"
           },
           {
@@ -152,9 +152,9 @@
             "name": "IdentifyType",
             "type": "IdentifyTypeEnum",
             "constraint": "desc",
-            "quality": "MS",
+            "quality": "R V",
             "default": null,
-            "access": "R V",
+            "access": "R",
             "conformance": "M"
           }
         ],
@@ -251,7 +251,7 @@
             "code": "GN",
             "name": "GroupNames",
             "summary": "The ability to store a name for a group.",
-            "conformance": ""
+            "conformance": null
           }
         ],
         "data_types": [
@@ -294,8 +294,8 @@
                 "name": "GroupID",
                 "type": "group-id",
                 "constraint": "min 1",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               },
               {
@@ -303,8 +303,8 @@
                 "name": "GroupName",
                 "type": "string",
                 "constraint": "max 16",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -322,8 +322,8 @@
                 "name": "GroupID",
                 "type": "group-id",
                 "constraint": "min 1",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -341,8 +341,8 @@
                 "name": "GroupList",
                 "type": "list[group-id]",
                 "constraint": "all[min 1]",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -360,8 +360,8 @@
                 "name": "GroupID",
                 "type": "group-id",
                 "constraint": "min 1",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -388,8 +388,8 @@
                 "name": "GroupID",
                 "type": "group-id",
                 "constraint": "min 1",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               },
               {
@@ -397,8 +397,8 @@
                 "name": "GroupName",
                 "type": "string",
                 "constraint": "max 16",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -409,15 +409,15 @@
             "direction": "client ⇐ server",
             "response": "N",
             "access": "M",
-            "conformance": "",
+            "conformance": null,
             "fields": [
               {
                 "id": "0",
                 "name": "Status",
                 "type": "enum8",
                 "constraint": "desc",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               },
               {
@@ -425,8 +425,8 @@
                 "name": "GroupID",
                 "type": "group-id",
                 "constraint": "min 1",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -437,15 +437,15 @@
             "direction": "client ⇐ server",
             "response": "N",
             "access": "M",
-            "conformance": "",
+            "conformance": null,
             "fields": [
               {
                 "id": "0",
                 "name": "Status",
                 "type": "enum8",
                 "constraint": "desc",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               },
               {
@@ -453,8 +453,8 @@
                 "name": "GroupID",
                 "type": "group-id",
                 "constraint": "min 1",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               },
               {
@@ -462,8 +462,8 @@
                 "name": "GroupName",
                 "type": "string",
                 "constraint": "max 16",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -474,7 +474,7 @@
             "direction": "client ⇐ server",
             "response": "N",
             "access": "M",
-            "conformance": "",
+            "conformance": null,
             "fields": [
               {
                 "id": "0",
@@ -482,7 +482,7 @@
                 "type": "uint8",
                 "constraint": "all",
                 "quality": "X",
-                "default": "",
+                "default": null,
                 "conformance": "M"
               },
               {
@@ -490,8 +490,8 @@
                 "name": "GroupList",
                 "type": "list[group-id]",
                 "constraint": "all[min 1]",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -502,15 +502,15 @@
             "direction": "client ⇐ server",
             "response": "N",
             "access": "M",
-            "conformance": "",
+            "conformance": null,
             "fields": [
               {
                 "id": "0",
                 "name": "Status",
                 "type": "enum8",
                 "constraint": "desc",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               },
               {
@@ -518,8 +518,8 @@
                 "name": "GroupID",
                 "type": "group-id",
                 "constraint": "min 1",
-                "quality": "",
-                "default": "",
+                "quality": null,
+                "default": null,
                 "conformance": "M"
               }
             ]
@@ -580,31 +580,31 @@
               {
                 "value": "0",
                 "name": "SceneCount",
-                "summary": "This field SHALL indicate the number of scenes currently used in the server’s Scene Table on the endpoint where the Scenes Management cluster appears.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "1",
                 "name": "CurrentScene",
-                "summary": "This field SHALL indicate the scene identifier of the scene last invoked on the associated fabric. If no scene has been invoked, the value of this field SHALL be 0xFF, the undefined scene identifier.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "2",
                 "name": "CurrentGroup",
-                "summary": "This field SHALL indicate the group identifier of the scene last invoked on the associated fabric, or 0 if the scene last invoked is not associated with a group.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "3",
                 "name": "SceneValid",
-                "summary": "This field SHALL indicate whether the state of the server corresponds to that associated with the CurrentScene and CurrentGroup fields of the SceneInfoStruct they belong to. TRUE indicates that these fields are valid, FALSE indicates that they are not valid.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "4",
                 "name": "RemainingCapacity",
-                "summary": "This field SHALL indicate the remaining capacity of the Scene Table on this endpoint for the accessing fabric. Note that this value may change between reads, even if no entries are added or deleted on the accessing fabric, due to other clients associated with other fabrics adding or deleting entries that impact the resource usage on the device.",
+                "summary": null,
                 "conformance": "M"
               }
             ]
@@ -616,55 +616,55 @@
               {
                 "value": "0",
                 "name": "AttributeID",
-                "summary": "This field SHALL be present for all instances in a given ExtensionFieldSetStruct.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "1",
                 "name": "ValueUnsigned8",
-                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "summary": null,
                 "conformance": "O.a"
               },
               {
                 "value": "2",
                 "name": "ValueSigned8",
-                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "summary": null,
                 "conformance": "O.a"
               },
               {
                 "value": "3",
                 "name": "ValueUnsigned16",
-                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "summary": null,
                 "conformance": "O.a"
               },
               {
                 "value": "4",
                 "name": "ValueSigned16",
-                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "summary": null,
                 "conformance": "O.a"
               },
               {
                 "value": "5",
                 "name": "ValueUnsigned32",
-                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "summary": null,
                 "conformance": "O.a"
               },
               {
                 "value": "6",
                 "name": "ValueSigned32",
-                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "summary": null,
                 "conformance": "O.a"
               },
               {
                 "value": "7",
                 "name": "ValueUnsigned64",
-                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "summary": null,
                 "conformance": "O.a"
               },
               {
                 "value": "8",
                 "name": "ValueSigned64",
-                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "summary": null,
                 "conformance": "O.a"
               }
             ]
@@ -676,13 +676,13 @@
               {
                 "value": "0",
                 "name": "ClusterID",
-                "summary": "This field SHALL indicate the cluster-id of the cluster whose attributes are in the AttributeValueList field.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "1",
                 "name": "AttributeValueList",
-                "summary": "This field SHALL indicate a set of attributes and their values which are stored as part of a scene.",
+                "summary": null,
                 "conformance": "M"
               }
             ]
@@ -694,31 +694,31 @@
               {
                 "value": "0",
                 "name": "SceneGroupID",
-                "summary": "This field is the group identifier for which this scene applies, or 0 if the scene is not associated with a group.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "1",
                 "name": "SceneID",
-                "summary": "This field is unique within this group, which is used to identify this scene.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "2",
                 "name": "SceneName",
-                "summary": "The field is the name of the scene.",
+                "summary": null,
                 "conformance": "SN"
               },
               {
                 "value": "3",
                 "name": "SceneTransitionTime",
-                "summary": "This field is the amount of time, in milliseconds, it will take for a cluster to change from its current state to the requested state.",
+                "summary": null,
                 "conformance": "M"
               },
               {
                 "value": "4",
                 "name": "ExtensionFields",
-                "summary": "See the Scene Table Extensions subsections of individual clusters. A Scene Table Extension SHALL only use attributes with the Scene quality. Each ExtensionFieldSetStruct holds a set of values of these attributes for a cluster implemented on the same endpoint where the Scene (\"S\") designation appears in the quality column. A scene is the aggregate of all such fields across all clusters on the endpoint.",
+                "summary": null,
                 "conformance": "M"
               }
             ]
@@ -756,7 +756,563 @@
             "conformance": "M"
           }
         ],
-        "commands": [],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "AddScene",
+            "direction": "client ⇒ server",
+            "response": "AddSceneResponse",
+            "access": "F M",
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "TransitionTime",
+                "type": "uint32",
+                "constraint": "max 60000000",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "3",
+                "name": "SceneName",
+                "type": "string",
+                "constraint": "max 16",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "4",
+                "name": "ExtensionFieldSetStructs",
+                "type": "list[ExtensionFieldSetStruct]",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x00",
+            "name": "AddSceneResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": null,
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "status",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x01",
+            "name": "ViewScene",
+            "direction": "client ⇒ server",
+            "response": "ViewSceneResponse",
+            "access": "F O",
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x01",
+            "name": "ViewSceneResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": null,
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "status",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "3",
+                "name": "TransitionTime",
+                "type": "uint32",
+                "constraint": "max 60000000",
+                "quality": "desc",
+                "default": null,
+                "conformance": null
+              },
+              {
+                "id": "4",
+                "name": "SceneName",
+                "type": "string",
+                "constraint": "max 16",
+                "quality": "desc",
+                "default": null,
+                "conformance": null
+              },
+              {
+                "id": "5",
+                "name": "ExtensionFieldSetStructs",
+                "type": "list[ExtensionFieldSetStruct]",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": null
+              }
+            ]
+          },
+          {
+            "id": "0x02",
+            "name": "RemoveScene",
+            "direction": "client ⇒ server",
+            "response": "RemoveSceneResponse",
+            "access": "F M",
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x02",
+            "name": "RemoveSceneResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": null,
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "status",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x03",
+            "name": "RemoveAllScenes",
+            "direction": "client ⇒ server",
+            "response": "RemoveAllScenesResponse",
+            "access": "F M",
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x03",
+            "name": "RemoveAllScenesResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": null,
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "status",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x04",
+            "name": "StoreScene",
+            "direction": "client ⇒ server",
+            "response": "StoreSceneResponse",
+            "access": "F M",
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x04",
+            "name": "StoreSceneResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": null,
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "status",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x05",
+            "name": "RecallScene",
+            "direction": "client ⇒ server",
+            "response": "Y",
+            "access": "F O",
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "SceneID",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "TransitionTime",
+                "type": "uint32",
+                "constraint": "max 60000000",
+                "quality": "X",
+                "default": null,
+                "conformance": "O"
+              }
+            ]
+          },
+          {
+            "id": "0x06",
+            "name": "GetSceneMembership",
+            "direction": "client ⇒ server",
+            "response": "GetSceneMembershipResponse",
+            "access": "F O",
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x06",
+            "name": "GetSceneMembershipResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": null,
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "status",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "Capacity",
+                "type": "uint8",
+                "constraint": "all",
+                "quality": "X",
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "3",
+                "name": "SceneList",
+                "type": "list[uint8]",
+                "constraint": "Status==Success",
+                "quality": null,
+                "default": null,
+                "conformance": null
+              }
+            ]
+          },
+          {
+            "id": "0x40",
+            "name": "CopyScene",
+            "direction": "client ⇒ server",
+            "response": "CopySceneResponse",
+            "access": "F M",
+            "conformance": "O",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Mode",
+                "type": "CopyModeBitmap",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupIdentifierFrom",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "SceneIdentifierFrom",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "3",
+                "name": "GroupIdentifierTo",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "4",
+                "name": "SceneIdentifierTo",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x40",
+            "name": "CopySceneResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": null,
+            "conformance": null,
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "status",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupIdentifierFrom",
+                "type": "group-id",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "SceneIdentifierFrom",
+                "type": "uint8",
+                "constraint": "max 254",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
         "events": []
       },
       "metadata": {
