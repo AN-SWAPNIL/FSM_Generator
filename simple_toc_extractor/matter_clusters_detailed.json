@@ -1,0 +1,771 @@
+{
+  "extraction_info": {
+    "total_clusters": 3,
+    "pdf_source": "..\\Matter-1.4-Application-Cluster-Specification.pdf",
+    "extraction_timestamp": "2025-08-09T12:57:15.367734"
+  },
+  "clusters": [
+    {
+      "cluster_info": {
+        "cluster_name": "Identify",
+        "cluster_id": "0x0003",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Utility",
+          "scope": "Endpoint",
+          "pics_code": "I"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Mandatory global ClusterRevision attribute added"
+          },
+          {
+            "revision": "2",
+            "description": "CCB 2808"
+          },
+          {
+            "revision": "3",
+            "description": "All Hubs changes"
+          },
+          {
+            "revision": "4",
+            "description": "New data model format and notation; add IdentifyType"
+          },
+          {
+            "revision": "5",
+            "description": "Removed Query feature"
+          }
+        ],
+        "features": [],
+        "data_types": [
+          {
+            "name": "IdentifyTypeEnum Type",
+            "base_type": "enum8",
+            "values": [
+              {
+                "value": "0x00",
+                "name": "None",
+                "summary": "No presentation.",
+                "conformance": "M"
+              },
+              {
+                "value": "0x01",
+                "name": "LightOutput",
+                "summary": "Light output of a lighting product.",
+                "conformance": "M"
+              },
+              {
+                "value": "0x02",
+                "name": "VisibleIndicator",
+                "summary": "Typically a small LED.",
+                "conformance": "M"
+              },
+              {
+                "value": "0x03",
+                "name": "AudibleBeep",
+                "summary": null,
+                "conformance": "M"
+              },
+              {
+                "value": "0x04",
+                "name": "Display",
+                "summary": "Presentation will be visible on display screen.",
+                "conformance": "M"
+              },
+              {
+                "value": "0x05",
+                "name": "Actuator",
+                "summary": "Presentation will be conveyed by actuator functionality such as through a window blind operation or in-wall relay.",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "name": "EffectIdentifierEnum Type",
+            "base_type": "enum8",
+            "values": [
+              {
+                "value": "0x00",
+                "name": "Blink",
+                "summary": "e.g., Light is turned on/off once.",
+                "conformance": "M"
+              },
+              {
+                "value": "0x01",
+                "name": "Breathe",
+                "summary": "e.g., Light is turned on/off over 1 second and repeated 15 times.",
+                "conformance": "M"
+              },
+              {
+                "value": "0x02",
+                "name": "Okay",
+                "summary": "e.g., Colored light turns green for 1 second; non-colored light flashes twice.",
+                "conformance": "M"
+              },
+              {
+                "value": "0x0B",
+                "name": "ChannelChange",
+                "summary": "e.g., Colored light turns orange for 8 seconds; non-colored light switches to the maximum brightness for 0.5s and then minimum brightness for 7.5s.",
+                "conformance": "M"
+              },
+              {
+                "value": "0xFE",
+                "name": "FinishEffect",
+                "summary": "Complete the current effect sequence before terminating. e.g., if in the middle of a breathe effect (as above), first complete the current 1s breathe effect and then terminate the effect.",
+                "conformance": "M"
+              },
+              {
+                "value": "0xFF",
+                "name": "StopEffect",
+                "summary": "Terminate the effect as soon as possible.",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "name": "EffectVariantEnum Type",
+            "base_type": "enum8",
+            "values": [
+              {
+                "value": "0x00",
+                "name": "Default",
+                "summary": "Indicates the default effect is used",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "IdentifyTime",
+            "type": "uint16",
+            "constraint": "all",
+            "quality": null,
+            "default": "0",
+            "access": "RW VO",
+            "conformance": "M"
+          },
+          {
+            "id": "0x0001",
+            "name": "IdentifyType",
+            "type": "IdentifyTypeEnum",
+            "constraint": "desc",
+            "quality": "MS",
+            "default": null,
+            "access": "R V",
+            "conformance": "M"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "Identify",
+            "direction": "client ⇒ server",
+            "response": "Y",
+            "access": null,
+            "conformance": "M",
+            "fields": [
+              {
+                "id": "0",
+                "name": "IdentifyTime",
+                "type": "uint16",
+                "constraint": "all",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x40",
+            "name": "TriggerEffect",
+            "direction": "client ⇒ server",
+            "response": "Y",
+            "access": null,
+            "conformance": "O",
+            "fields": [
+              {
+                "id": "0",
+                "name": "EffectIdentifier",
+                "type": "EffectIdentifierEnum",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "EffectVariant",
+                "type": "EffectVariantEnum",
+                "constraint": "desc",
+                "quality": null,
+                "default": null,
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "26-31",
+        "extraction_method": "Direct",
+        "text_length": 12705,
+        "section_number": "1.2",
+        "category": "General"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Groups",
+        "cluster_id": "0x0004",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Utility",
+          "scope": "Endpoint",
+          "pics_code": "G"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Mandatory global ClusterRevision attribute added; CCB 1745 2100"
+          },
+          {
+            "revision": "2",
+            "description": "CCB 2289"
+          },
+          {
+            "revision": "3",
+            "description": "CCB 2310 2704"
+          },
+          {
+            "revision": "4",
+            "description": "New data model format and notation"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "GN",
+            "name": "GroupNames",
+            "summary": "The ability to store a name for a group.",
+            "conformance": ""
+          }
+        ],
+        "data_types": [
+          {
+            "name": "NameSupportBitmap",
+            "base_type": "map8",
+            "values": [
+              {
+                "value": "7",
+                "name": "GroupNames",
+                "summary": "The ability to store a name for a group.",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "NameSupport",
+            "type": "NameSupportBitmap",
+            "constraint": "desc",
+            "quality": "F",
+            "default": "0",
+            "access": "R V",
+            "conformance": "M"
+          }
+        ],
+        "commands": [
+          {
+            "id": "0x00",
+            "name": "AddGroup",
+            "direction": "client ⇒ server",
+            "response": "AddGroupResponse",
+            "access": "M",
+            "conformance": "F",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "min 1",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupName",
+                "type": "string",
+                "constraint": "max 16",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x01",
+            "name": "ViewGroup",
+            "direction": "client ⇒ server",
+            "response": "ViewGroupResponse",
+            "access": "O",
+            "conformance": "F",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "min 1",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x02",
+            "name": "GetGroupMembership",
+            "direction": "client ⇒ server",
+            "response": "GetGroupMembershipResponse",
+            "access": "O",
+            "conformance": "F",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupList",
+                "type": "list[group-id]",
+                "constraint": "all[min 1]",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x03",
+            "name": "RemoveGroup",
+            "direction": "client ⇒ server",
+            "response": "RemoveGroupResponse",
+            "access": "M",
+            "conformance": "F",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "min 1",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x04",
+            "name": "RemoveAllGroups",
+            "direction": "client ⇒ server",
+            "response": "Y",
+            "access": "M",
+            "conformance": "F",
+            "fields": []
+          },
+          {
+            "id": "0x05",
+            "name": "AddGroupIfIdentifying",
+            "direction": "client ⇒ server",
+            "response": "Y",
+            "access": "M",
+            "conformance": "F",
+            "fields": [
+              {
+                "id": "0",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "min 1",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupName",
+                "type": "string",
+                "constraint": "max 16",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x00",
+            "name": "AddGroupResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": "M",
+            "conformance": "",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "enum8",
+                "constraint": "desc",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "min 1",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x01",
+            "name": "ViewGroupResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": "M",
+            "conformance": "",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "enum8",
+                "constraint": "desc",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "min 1",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              },
+              {
+                "id": "2",
+                "name": "GroupName",
+                "type": "string",
+                "constraint": "max 16",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x02",
+            "name": "GetGroupMembershipResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": "M",
+            "conformance": "",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Capacity",
+                "type": "uint8",
+                "constraint": "all",
+                "quality": "X",
+                "default": "",
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupList",
+                "type": "list[group-id]",
+                "constraint": "all[min 1]",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "id": "0x03",
+            "name": "RemoveGroupResponse",
+            "direction": "client ⇐ server",
+            "response": "N",
+            "access": "M",
+            "conformance": "",
+            "fields": [
+              {
+                "id": "0",
+                "name": "Status",
+                "type": "enum8",
+                "constraint": "desc",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              },
+              {
+                "id": "1",
+                "name": "GroupID",
+                "type": "group-id",
+                "constraint": "min 1",
+                "quality": "",
+                "default": "",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "31-39",
+        "extraction_method": "Direct",
+        "text_length": 22170,
+        "section_number": "1.3",
+        "category": "General"
+      }
+    },
+    {
+      "cluster_info": {
+        "cluster_name": "Scenes Management",
+        "cluster_id": "0x0062",
+        "classification": {
+          "hierarchy": "Base",
+          "role": "Application",
+          "scope": "Endpoint",
+          "pics_code": "S"
+        },
+        "revision_history": [
+          {
+            "revision": "1",
+            "description": "Based on the ZCL Scenes Cluster, Updated the Cluster ID to 0x0062, the name to Scenes Management, removed the provisional status; Removed attributes SceneCount, CurrentScene, CurrentGroup, SceneValid, and NameSupport; Removed Explicit, TableSize and FabricScenes features; Removed EnhancedAddScene, EnhancedAddSceneResponse, EnhancedViewScene, EnhancedViewSceneResponse; TransitionTime field changed milliseconds in AddScene, ViewSceneResponse and RecallScene"
+          }
+        ],
+        "features": [
+          {
+            "bit": "0",
+            "code": "SN",
+            "name": "SceneNames",
+            "summary": "The ability to store a name for a scene.",
+            "conformance": "O"
+          }
+        ],
+        "data_types": [
+          {
+            "name": "CopyModeBitmap",
+            "base_type": "map8",
+            "values": [
+              {
+                "value": "0",
+                "name": "CopyAllScenes",
+                "summary": "Copy all scenes in the scene table",
+                "conformance": null
+              }
+            ]
+          },
+          {
+            "name": "SceneInfoStruct",
+            "base_type": null,
+            "values": [
+              {
+                "value": "0",
+                "name": "SceneCount",
+                "summary": "This field SHALL indicate the number of scenes currently used in the server’s Scene Table on the endpoint where the Scenes Management cluster appears.",
+                "conformance": "M"
+              },
+              {
+                "value": "1",
+                "name": "CurrentScene",
+                "summary": "This field SHALL indicate the scene identifier of the scene last invoked on the associated fabric. If no scene has been invoked, the value of this field SHALL be 0xFF, the undefined scene identifier.",
+                "conformance": "M"
+              },
+              {
+                "value": "2",
+                "name": "CurrentGroup",
+                "summary": "This field SHALL indicate the group identifier of the scene last invoked on the associated fabric, or 0 if the scene last invoked is not associated with a group.",
+                "conformance": "M"
+              },
+              {
+                "value": "3",
+                "name": "SceneValid",
+                "summary": "This field SHALL indicate whether the state of the server corresponds to that associated with the CurrentScene and CurrentGroup fields of the SceneInfoStruct they belong to. TRUE indicates that these fields are valid, FALSE indicates that they are not valid.",
+                "conformance": "M"
+              },
+              {
+                "value": "4",
+                "name": "RemainingCapacity",
+                "summary": "This field SHALL indicate the remaining capacity of the Scene Table on this endpoint for the accessing fabric. Note that this value may change between reads, even if no entries are added or deleted on the accessing fabric, due to other clients associated with other fabrics adding or deleting entries that impact the resource usage on the device.",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "name": "AttributeValuePairStruct",
+            "base_type": null,
+            "values": [
+              {
+                "value": "0",
+                "name": "AttributeID",
+                "summary": "This field SHALL be present for all instances in a given ExtensionFieldSetStruct.",
+                "conformance": "M"
+              },
+              {
+                "value": "1",
+                "name": "ValueUnsigned8",
+                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "conformance": "O.a"
+              },
+              {
+                "value": "2",
+                "name": "ValueSigned8",
+                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "conformance": "O.a"
+              },
+              {
+                "value": "3",
+                "name": "ValueUnsigned16",
+                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "conformance": "O.a"
+              },
+              {
+                "value": "4",
+                "name": "ValueSigned16",
+                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "conformance": "O.a"
+              },
+              {
+                "value": "5",
+                "name": "ValueUnsigned32",
+                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "conformance": "O.a"
+              },
+              {
+                "value": "6",
+                "name": "ValueSigned32",
+                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "conformance": "O.a"
+              },
+              {
+                "value": "7",
+                "name": "ValueUnsigned64",
+                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "conformance": "O.a"
+              },
+              {
+                "value": "8",
+                "name": "ValueSigned64",
+                "summary": "These fields SHALL indicate the attribute value as part of an extension field set, associated with a given AttributeID under an ExtensionFieldSetStruct’s ClusterID.",
+                "conformance": "O.a"
+              }
+            ]
+          },
+          {
+            "name": "ExtensionFieldSetStruct",
+            "base_type": null,
+            "values": [
+              {
+                "value": "0",
+                "name": "ClusterID",
+                "summary": "This field SHALL indicate the cluster-id of the cluster whose attributes are in the AttributeValueList field.",
+                "conformance": "M"
+              },
+              {
+                "value": "1",
+                "name": "AttributeValueList",
+                "summary": "This field SHALL indicate a set of attributes and their values which are stored as part of a scene.",
+                "conformance": "M"
+              }
+            ]
+          },
+          {
+            "name": "Logical Scene Table",
+            "base_type": null,
+            "values": [
+              {
+                "value": "0",
+                "name": "SceneGroupID",
+                "summary": "This field is the group identifier for which this scene applies, or 0 if the scene is not associated with a group.",
+                "conformance": "M"
+              },
+              {
+                "value": "1",
+                "name": "SceneID",
+                "summary": "This field is unique within this group, which is used to identify this scene.",
+                "conformance": "M"
+              },
+              {
+                "value": "2",
+                "name": "SceneName",
+                "summary": "The field is the name of the scene.",
+                "conformance": "SN"
+              },
+              {
+                "value": "3",
+                "name": "SceneTransitionTime",
+                "summary": "This field is the amount of time, in milliseconds, it will take for a cluster to change from its current state to the requested state.",
+                "conformance": "M"
+              },
+              {
+                "value": "4",
+                "name": "ExtensionFields",
+                "summary": "See the Scene Table Extensions subsections of individual clusters. A Scene Table Extension SHALL only use attributes with the Scene quality. Each ExtensionFieldSetStruct holds a set of values of these attributes for a cluster implemented on the same endpoint where the Scene (\"S\") designation appears in the quality column. A scene is the aggregate of all such fields across all clusters on the endpoint.",
+                "conformance": "M"
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "id": "0x0000",
+            "name": "LastConfiguredBy",
+            "type": "node-id",
+            "constraint": "all",
+            "quality": "X",
+            "default": "null",
+            "access": "R V",
+            "conformance": "O"
+          },
+          {
+            "id": "0x0001",
+            "name": "SceneTableSize",
+            "type": "uint16",
+            "constraint": "desc",
+            "quality": "F",
+            "default": "16",
+            "access": "R V",
+            "conformance": "M"
+          },
+          {
+            "id": "0x0002",
+            "name": "FabricSceneInfo",
+            "type": "list[SceneInfoStruct]",
+            "constraint": "desc",
+            "quality": "R V F",
+            "default": null,
+            "access": null,
+            "conformance": "M"
+          }
+        ],
+        "commands": [],
+        "events": []
+      },
+      "metadata": {
+        "source_pages": "39-60",
+        "extraction_method": "Direct",
+        "text_length": 47714,
+        "section_number": "1.4",
+        "category": "General"
+      }
+    }
+  ]
+}

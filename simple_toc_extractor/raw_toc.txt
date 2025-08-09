@@ -1,0 +1,641 @@
+Matter Application Clusters ... 2
+Copyright Notice, License and Disclaimer ... 5
+Revision History ... 7
+Table of Contents ... 9
+Introduction ... 25
+  Scope and Purpose ... 25
+  References ... 25
+    CSA Reference Documents ... 25
+    External Reference Documents ... 26
+  Provisional ... 27
+    List of Provisional Items ... 27
+Chapter 1. General ... 29
+  1.1. General Description ... 29
+    1.1.1. Introduction ... 29
+    1.1.2. Cluster List ... 29
+  1.2. Identify Cluster ... 30
+    1.2.1. Revision History ... 31
+    1.2.2. Classification ... 31
+    1.2.3. Cluster ID ... 31
+    1.2.4. Data Types ... 31
+    1.2.5. Attributes ... 33
+    1.2.6. Commands ... 33
+  1.3. Groups Cluster ... 35
+    1.3.1. Revision History ... 35
+    1.3.2. Classification ... 35
+    1.3.3. Cluster ID ... 35
+    1.3.4. Features ... 35
+    1.3.5. Data Types ... 36
+    1.3.6. Attributes ... 36
+    1.3.7. Commands ... 36
+  1.4. Scenes Management Cluster ... 43
+    1.4.1. Revision History ... 44
+    1.4.2. Classification ... 44
+    1.4.3. Cluster ID ... 44
+    1.4.4. Features ... 44
+    1.4.5. Dependencies ... 45
+    1.4.6. Handling of fabric-scoping ... 45
+    1.4.7. Data Types ... 45
+    1.4.8. Attributes ... 51
+    1.4.9. Commands ... 51
+  1.5. On/Off Cluster ... 64
+    1.5.1. Revision History ... 64
+    1.5.2. Classification ... 65
+    1.5.3. Cluster ID ... 65
+    1.5.4. Features ... 65
+    1.5.5. Data Types ... 66
+    1.5.6. Attributes ... 68
+    1.5.7. Commands ... 70
+    1.5.8. State Description ... 73
+  1.6. Level Control Cluster ... 74
+    1.6.1. Revision History ... 74
+    1.6.2. Classification ... 75
+    1.6.3. Cluster ID ... 75
+    1.6.4. Features ... 75
+    1.6.5. Data Types ... 78
+    1.6.6. Attributes ... 78
+    1.6.7. Commands ... 83
+    1.6.8. State Change Table for Lighting ... 87
+  1.7. Boolean State Cluster ... 89
+    1.7.1. Revision History ... 89
+    1.7.2. Classification ... 89
+    1.7.3. Cluster ID ... 89
+    1.7.4. Attributes ... 89
+    1.7.5. Events ... 90
+  1.8. Boolean State Configuration Cluster ... 90
+    1.8.1. Revision History ... 90
+    1.8.2. Classification ... 90
+    1.8.3. Cluster ID ... 91
+    1.8.4. Features ... 91
+    1.8.5. Data Types ... 91
+    1.8.6. Attributes ... 92
+    1.8.7. Commands ... 94
+    1.8.8. Events ... 95
+  1.9. Mode Select Cluster ... 96
+    1.9.1. Revision History ... 97
+    1.9.2. Classification ... 97
+    1.9.3. Cluster ID ... 97
+    1.9.4. Features ... 97
+    1.9.5. Data Types ... 98
+    1.9.6. Attributes ... 99
+    1.9.7. Commands ... 101
+  1.10. Mode Base Cluster ... 101
+    1.10.1. Revision History ... 102
+    1.10.2. Classification ... 102
+    1.10.3. Cluster ID ... 102
+    1.10.4. Features ... 102
+    1.10.5. Data Types ... 102
+    1.10.6. Attributes ... 104
+    1.10.7. Commands ... 106
+    1.10.8. Mode Namespace ... 108
+  1.11. Low Power Cluster ... 110
+    1.11.1. Revision History ... 110
+    1.11.2. Classification ... 110
+    1.11.3. Cluster ID ... 110
+    1.11.4. Commands ... 111
+  1.12. Wake On LAN Cluster ... 111
+    1.12.1. Revision History ... 111
+    1.12.2. Classification ... 111
+    1.12.3. Cluster ID ... 112
+    1.12.4. Attributes ... 112
+  1.13. Switch Cluster ... 112
+    1.13.1. Revision History ... 113
+    1.13.2. Classification ... 113
+    1.13.3. Cluster ID ... 113
+    1.13.4. Features ... 113
+    1.13.5. Attributes ... 114
+    1.13.6. Events ... 116
+    1.13.7. Sequence of generated events ... 120
+    1.13.8. Sequence of events for MultiPress ... 123
+    1.13.9. Summary of cases for MS feature flag ... 127
+    1.13.10. Multi Position Details ... 128
+  1.14. Operational State Cluster ... 131
+    1.14.1. Revision History ... 131
+    1.14.2. Classification ... 132
+    1.14.3. Cluster ID ... 132
+    1.14.4. Data Types ... 132
+    1.14.5. Attributes ... 135
+    1.14.6. Commands ... 137
+    1.14.7. Events ... 140
+  1.15. Alarm Base Cluster ... 142
+    1.15.1. Revision History ... 142
+    1.15.2. Classification ... 142
+    1.15.3. Cluster ID ... 142
+    1.15.4. Features ... 142
+    1.15.5. Data Types ... 143
+    1.15.6. Attributes ... 143
+    1.15.7. Commands ... 143
+    1.15.8. Events ... 145
+  1.16. Messages Cluster ... 145
+    1.16.1. Revision History ... 146
+    1.16.2. Classification ... 146
+    1.16.3. Cluster ID ... 146
+    1.16.4. Features ... 146
+    1.16.5. Data Types ... 147
+    1.16.6. Attributes ... 150
+    1.16.7. Commands ... 151
+    1.16.8. Events ... 153
+  1.17. Service Area Cluster ... 155
+    1.17.1. Revision History ... 155
+    1.17.2. Classification ... 155
+    1.17.3. Cluster ID ... 155
+    1.17.4. Features ... 156
+    1.17.5. Data Types ... 156
+    1.17.6. Attributes ... 162
+    1.17.7. Commands ... 167
+Chapter 2. Measurement and Sensing ... 171
+  2.1. General Description ... 171
+    2.1.1. Introduction ... 171
+    2.1.2. Cluster List ... 171
+    2.1.3. Measured Value ... 172
+    2.1.4. Measurement Accuracy ... 172
+  2.2. Illuminance Measurement Cluster ... 177
+    2.2.1. Revision History ... 177
+    2.2.2. Classification ... 177
+    2.2.3. Cluster ID ... 177
+    2.2.4. Data Types ... 177
+    2.2.5. Attributes ... 178
+  2.3. Temperature Measurement Cluster ... 179
+    2.3.1. Revision History ... 179
+    2.3.2. Classification ... 179
+    2.3.3. Cluster ID ... 179
+    2.3.4. Attributes ... 180
+  2.4. Pressure Measurement Cluster ... 180
+    2.4.1. Revision History ... 181
+    2.4.2. Classification ... 181
+    2.4.3. Cluster ID ... 181
+    2.4.4. Features ... 181
+    2.4.5. Attributes ... 181
+  2.5. Flow Measurement Cluster ... 183
+    2.5.1. Revision History ... 183
+    2.5.2. Classification ... 184
+    2.5.3. Cluster ID ... 184
+    2.5.4. Attributes ... 184
+  2.6. Water Content Measurement Clusters ... 185
+    2.6.1. Revision History ... 185
+    2.6.2. Classification ... 185
+    2.6.3. Cluster ID ... 185
+    2.6.4. Attributes ... 185
+  2.7. Occupancy Sensing Cluster ... 186
+    2.7.1. Revision History ... 187
+    2.7.2. Classification ... 187
+    2.7.3. Cluster ID ... 188
+    2.7.4. Features ... 188
+    2.7.5. Data Types ... 188
+    2.7.6. Attributes ... 190
+    2.7.7. Events ... 196
+  2.8. Resource Monitoring Clusters ... 196
+    2.8.1. Revision History ... 197
+    2.8.2. Classification ... 197
+    2.8.3. Cluster IDs ... 197
+    2.8.4. Features ... 197
+    2.8.5. Data Types ... 198
+    2.8.6. Attributes ... 199
+    2.8.7. Commands ... 200
+  2.9. Air Quality Cluster ... 201
+    2.9.1. Revision History ... 201
+    2.9.2. Classification ... 201
+    2.9.3. Cluster ID ... 201
+    2.9.4. Features ... 201
+    2.9.5. Data Types ... 202
+    2.9.6. Attributes ... 202
+  2.10. Concentration Measurement Clusters ... 202
+    2.10.1. Revision History ... 202
+    2.10.2. Classification ... 203
+    2.10.3. Cluster IDs ... 203
+    2.10.4. Features ... 204
+    2.10.5. Data Types ... 204
+    2.10.6. Attributes ... 205
+  2.11. Smoke CO Alarm Cluster ... 208
+    2.11.1. Revision History ... 208
+    2.11.2. Classification ... 208
+    2.11.3. Cluster ID ... 208
+    2.11.4. Features ... 208
+    2.11.5. Data Types ... 208
+    2.11.6. Attributes ... 212
+    2.11.7. Commands ... 215
+    2.11.8. Events ... 215
+  2.12. Electrical Energy Measurement Cluster ... 218
+    2.12.1. Revision History ... 218
+    2.12.2. Classification ... 218
+    2.12.3. Cluster ID ... 218
+    2.12.4. Features ... 218
+    2.12.5. Data Types ... 219
+    2.12.6. Attributes ... 223
+    2.12.7. Events ... 225
+  2.13. Electrical Power Measurement Cluster ... 226
+    2.13.1. Revision History ... 226
+    2.13.2. Classification ... 226
+    2.13.3. Cluster ID ... 226
+    2.13.4. Features ... 226
+    2.13.5. Data Types ... 227
+    2.13.6. Attributes ... 231
+    2.13.7. Events ... 237
+Chapter 3. Lighting ... 239
+  3.1. General Description ... 239
+    3.1.1. Introduction ... 239
+    3.1.2. Terms ... 239
+    3.1.3. Cluster List ... 239
+  3.2. Color Control Cluster ... 239
+    3.2.1. Revision History ... 240
+    3.2.2. Classification ... 240
+    3.2.3. Cluster ID ... 240
+    3.2.4. Features ... 240
+    3.2.5. Dependencies ... 241
+    3.2.6. Data Types ... 242
+    3.2.7. Attributes ... 246
+    3.2.8. Commands ... 258
+  3.3. Ballast Configuration Cluster ... 281
+    3.3.1. Revision History ... 281
+    3.3.2. Classification ... 281
+    3.3.3. Cluster ID ... 282
+    3.3.4. Dependencies ... 282
+    3.3.5. Data Types ... 282
+    3.3.6. Attributes ... 283
+    3.3.7. The Dimming Light Curve ... 286
+Chapter 4. HVAC ... 289
+  4.1. General Description ... 289
+    4.1.1. Introduction ... 289
+    4.1.2. Terms ... 289
+    4.1.3. Cluster List ... 289
+  4.2. Pump Configuration and Control Cluster ... 289
+    4.2.1. Revision History ... 290
+    4.2.2. Classification ... 290
+    4.2.3. Cluster ID ... 290
+    4.2.4. Features ... 290
+    4.2.5. Dependencies ... 291
+    4.2.6. Data Types ... 291
+    4.2.7. Attributes ... 295
+    4.2.8. Events ... 302
+  4.3. Thermostat Cluster ... 303
+    4.3.1. Revision History ... 303
+    4.3.2. Classification ... 304
+    4.3.3. Cluster ID ... 304
+    4.3.4. Features ... 304
+    4.3.5. Units of Temperature ... 305
+    4.3.6. Setpoint Limits ... 306
+    4.3.7. Dependencies ... 306
+    4.3.8. Data Types ... 307
+    4.3.9. Attributes ... 324
+    4.3.10. Commands ... 344
+  4.4. Fan Control Cluster ... 352
+    4.4.1. Revision History ... 352
+    4.4.2. Classification ... 352
+    4.4.3. Cluster ID ... 352
+    4.4.4. Features ... 352
+    4.4.5. Data Types ... 353
+    4.4.6. Attributes ... 355
+    4.4.7. Commands ... 360
+  4.5. Thermostat User Interface Configuration Cluster ... 361
+    4.5.1. Revision History ... 361
+    4.5.2. Classification ... 361
+    4.5.3. Cluster ID ... 361
+    4.5.4. Conversion of Temperature Values for Display ... 361
+    4.5.5. Data Types ... 361
+    4.5.6. Attributes ... 363
+  4.6. Valve Configuration and Control Cluster ... 363
+    4.6.1. Revision History ... 363
+    4.6.2. Classification ... 364
+    4.6.3. Cluster ID ... 364
+    4.6.4. Features ... 364
+    4.6.5. Data Types ... 364
+    4.6.6. Status Codes ... 365
+    4.6.7. Attributes ... 365
+    4.6.8. Commands ... 369
+    4.6.9. Events ... 371
+Chapter 5. Closures ... 373
+  5.1. General Description ... 373
+    5.1.1. Introduction ... 373
+    5.1.2. Cluster List ... 373
+  5.2. Door Lock Cluster ... 373
+    5.2.1. Revision History ... 373
+    5.2.2. Classification ... 374
+    5.2.3. Cluster ID ... 374
+    5.2.4. Features ... 374
+    5.2.5. Recommended steps for creating a new User ... 377
+    5.2.6. Data Types ... 378
+    5.2.7. Status Codes ... 395
+    5.2.8. PIN/RFID Code Format ... 395
+    5.2.9. Attributes ... 395
+    5.2.10. Commands ... 406
+    5.2.11. Events ... 447
+  5.3. Window Covering Cluster ... 453
+    5.3.1. Revision History ... 453
+    5.3.2. Classification ... 453
+    5.3.3. Cluster ID ... 453
+    5.3.4. Features ... 454
+    5.3.5. Data Types ... 455
+    5.3.6. Attributes ... 461
+    5.3.7. Commands ... 468
+Chapter 6. Media ... 473
+  6.1. General Description ... 473
+    6.1.1. Introduction ... 473
+    6.1.2. Cluster List ... 473
+  6.2. Account Login Cluster ... 475
+    6.2.1. Revision History ... 476
+    6.2.2. Classification ... 476
+    6.2.3. Cluster ID ... 476
+    6.2.4. Commands ... 476
+    6.2.5. Events ... 480
+  6.3. Application Basic Cluster ... 480
+    6.3.1. Revision History ... 480
+    6.3.2. Classification ... 480
+    6.3.3. Cluster ID ... 481
+    6.3.4. Data Types ... 481
+    6.3.5. Attributes ... 482
+  6.4. Application Launcher Cluster ... 483
+    6.4.1. Revision History ... 483
+    6.4.2. Classification ... 483
+    6.4.3. Cluster ID ... 484
+    6.4.4. Features ... 484
+    6.4.5. Data Types ... 484
+    6.4.6. Attributes ... 485
+    6.4.7. Commands ... 486
+  6.5. Audio Output Cluster ... 488
+    6.5.1. Revision History ... 489
+    6.5.2. Classification ... 489
+    6.5.3. Cluster ID ... 489
+    6.5.4. Features ... 489
+    6.5.5. Data Types ... 489
+    6.5.6. Attributes ... 490
+    6.5.7. Commands ... 490
+  6.6. Channel Cluster ... 491
+    6.6.1. Revision History ... 492
+    6.6.2. Classification ... 492
+    6.6.3. Cluster ID ... 492
+    6.6.4. Features ... 492
+    6.6.5. Data Types ... 492
+    6.6.6. Attributes ... 501
+    6.6.7. Commands ... 501
+  6.7. Content Launcher Cluster ... 507
+    6.7.1. Revision History ... 507
+    6.7.2. Classification ... 508
+    6.7.3. Cluster ID ... 508
+    6.7.4. Features ... 508
+    6.7.5. Data Types ... 508
+    6.7.6. Attributes ... 517
+    6.7.7. Commands ... 518
+  6.8. Keypad Input Cluster ... 521
+    6.8.1. Revision History ... 521
+    6.8.2. Classification ... 521
+    6.8.3. Cluster ID ... 521
+    6.8.4. Features ... 521
+    6.8.5. Data Types ... 522
+    6.8.6. Commands ... 525
+  6.9. Media Input Cluster ... 526
+    6.9.1. Revision History ... 526
+    6.9.2. Classification ... 526
+    6.9.3. Cluster ID ... 526
+    6.9.4. Features ... 526
+    6.9.5. Data Types ... 527
+    6.9.6. Attributes ... 528
+    6.9.7. Commands ... 528
+  6.10. Media Playback Cluster ... 529
+    6.10.1. Revision History ... 529
+    6.10.2. Classification ... 530
+    6.10.3. Cluster ID ... 530
+    6.10.4. Features ... 530
+    6.10.5. Data Types ... 531
+    6.10.6. Attributes ... 537
+    6.10.7. Commands ... 540
+    6.10.8. Events ... 545
+  6.11. Target Navigator Cluster ... 546
+    6.11.1. Revision History ... 547
+    6.11.2. Classification ... 547
+    6.11.3. Cluster ID ... 547
+    6.11.4. Data Types ... 547
+    6.11.5. Attributes ... 548
+    6.11.6. Commands ... 548
+    6.11.7. Events ... 549
+  6.12. Content App Observer Cluster ... 550
+    6.12.1. Revision History ... 551
+    6.12.2. Classification ... 551
+    6.12.3. Cluster ID ... 551
+    6.12.4. Data Types ... 551
+    6.12.5. Commands ... 551
+  6.13. Content Control Cluster ... 552
+    6.13.1. Revision History ... 553
+    6.13.2. Classification ... 553
+    6.13.3. Cluster ID ... 553
+    6.13.4. Features ... 553
+    6.13.5. Data Types ... 554
+    6.13.6. Status Codes ... 557
+    6.13.7. Attributes ... 558
+    6.13.8. Commands ... 561
+    6.13.9. Events ... 568
+Chapter 7. Robots ... 571
+  7.1. General Description ... 571
+    7.1.1. Introduction ... 571
+    7.1.2. Cluster List ... 571
+  7.2. RVC Run Mode Cluster ... 571
+    7.2.1. Revision History ... 571
+    7.2.2. Classification ... 572
+    7.2.3. Cluster ID ... 572
+    7.2.4. Features ... 572
+    7.2.5. Data Types ... 572
+    7.2.6. Attributes ... 573
+    7.2.7. Derived Cluster Namespace ... 573
+    7.2.8. Mode Use ... 575
+  7.3. RVC Clean Mode Cluster ... 575
+    7.3.1. Revision History ... 575
+    7.3.2. Classification ... 576
+    7.3.3. Cluster ID ... 576
+    7.3.4. Features ... 576
+    7.3.5. Data Types ... 576
+    7.3.6. Attributes ... 576
+    7.3.7. Derived Cluster Namespace ... 577
+    7.3.8. Mode Examples ... 578
+  7.4. RVC Operational State Cluster ... 578
+    7.4.1. Revision History ... 578
+    7.4.2. Classification ... 578
+    7.4.3. Cluster ID ... 579
+    7.4.4. Data Types ... 579
+    7.4.5. Commands ... 581
+Chapter 8. Home Appliances ... 583
+  8.1. General Description ... 583
+    8.1.1. Introduction ... 583
+    8.1.2. Cluster List ... 583
+  8.2. Temperature Control Cluster ... 584
+    8.2.1. Revision History ... 584
+    8.2.2. Classification ... 584
+    8.2.3. Cluster ID ... 585
+    8.2.4. Features ... 585
+    8.2.5. Attributes ... 585
+    8.2.6. Commands ... 587
+  8.3. Dishwasher Mode Cluster ... 588
+    8.3.1. Revision History ... 588
+    8.3.2. Classification ... 589
+    8.3.3. Cluster ID ... 589
+    8.3.4. Features ... 589
+    8.3.5. Data Types ... 589
+    8.3.6. Attributes ... 589
+    8.3.7. Derived Cluster Namespace ... 590
+  8.4. Dishwasher Alarm Cluster ... 590
+    8.4.1. Revision History ... 591
+    8.4.2. Classification ... 591
+    8.4.3. Cluster ID ... 591
+    8.4.4. Data Types ... 591
+  8.5. Laundry Washer Mode Cluster ... 591
+    8.5.1. Revision History ... 592
+    8.5.2. Classification ... 592
+    8.5.3. Cluster ID ... 592
+    8.5.4. Features ... 592
+    8.5.5. Data Types ... 592
+    8.5.6. Attributes ... 593
+    8.5.7. Derived Cluster Namespace ... 593
+    8.5.8. Mode Examples ... 594
+  8.6. Laundry Washer Controls Cluster ... 594
+    8.6.1. Revision History ... 594
+    8.6.2. Classification ... 594
+    8.6.3. Cluster ID ... 594
+    8.6.4. Features ... 595
+    8.6.5. Data Types ... 595
+    8.6.6. Attributes ... 596
+  8.7. Refrigerator And Temperature Controlled Cabinet Mode Cluster ... 597
+    8.7.1. Revision History ... 597
+    8.7.2. Classification ... 597
+    8.7.3. Cluster ID ... 597
+    8.7.4. Features ... 597
+    8.7.5. Data Types ... 598
+    8.7.6. Attributes ... 598
+    8.7.7. Derived Cluster Namespace ... 598
+    8.7.8. Mode Examples ... 599
+  8.8. Refrigerator Alarm Cluster ... 599
+    8.8.1. Revision History ... 599
+    8.8.2. Classification ... 600
+    8.8.3. Cluster ID ... 600
+    8.8.4. Features ... 600
+    8.8.5. Data Types ... 600
+    8.8.6. Attributes ... 600
+    8.8.7. Commands ... 600
+  8.9. Laundry Dryer Controls Cluster ... 601
+    8.9.1. Revision History ... 601
+    8.9.2. Classification ... 601
+    8.9.3. Cluster ID ... 601
+    8.9.4. Data Types ... 601
+    8.9.5. Attributes ... 602
+  8.10. Oven Cavity Operational State Cluster ... 602
+    8.10.1. Revision History ... 603
+    8.10.2. Classification ... 603
+    8.10.3. Cluster ID ... 603
+    8.10.4. Attributes ... 603
+    8.10.5. Commands ... 603
+  8.11. Oven Mode Cluster ... 604
+    8.11.1. Revision History ... 604
+    8.11.2. Classification ... 604
+    8.11.3. Cluster ID ... 604
+    8.11.4. Features ... 604
+    8.11.5. Data Types ... 604
+    8.11.6. Attributes ... 605
+    8.11.7. Derived Cluster Namespace ... 605
+    8.11.8. Mode Examples ... 607
+  8.12. Microwave Oven Mode Cluster ... 607
+    8.12.1. Revision History ... 607
+    8.12.2. Classification ... 607
+    8.12.3. Cluster ID ... 607
+    8.12.4. Features ... 607
+    8.12.5. Attributes ... 608
+    8.12.6. Commands ... 608
+    8.12.7. Derived Cluster Namespace ... 608
+  8.13. Microwave Oven Control Cluster ... 609
+    8.13.1. Revision History ... 609
+    8.13.2. Classification ... 609
+    8.13.3. Cluster ID ... 610
+    8.13.4. Features ... 610
+    8.13.5. Attributes ... 610
+    8.13.6. Commands ... 612
+Chapter 9. Energy Management ... 617
+  9.1. General Description ... 617
+    9.1.1. Introduction ... 617
+    9.1.2. Cluster List ... 617
+  9.2. Device Energy Management Cluster ... 617
+    9.2.1. Revision History ... 619
+    9.2.2. Classification ... 619
+    9.2.3. Cluster ID ... 619
+    9.2.4. Features ... 620
+    9.2.5. Dependencies ... 624
+    9.2.6. Definitions ... 624
+    9.2.7. Data Types ... 625
+    9.2.8. Attributes ... 640
+    9.2.9. Commands ... 644
+    9.2.10. Events ... 653
+  9.3. Energy EVSE Cluster ... 654
+    9.3.1. Revision History ... 655
+    9.3.2. Classification ... 655
+    9.3.3. Cluster ID ... 655
+    9.3.4. Features ... 655
+    9.3.5. Dependencies ... 657
+    9.3.6. Definitions ... 658
+    9.3.7. Data Types ... 658
+    9.3.8. Attributes ... 664
+    9.3.9. Commands ... 671
+    9.3.10. Events ... 677
+  9.4. Energy EVSE Mode Cluster ... 681
+    9.4.1. Revision History ... 681
+    9.4.2. Classification ... 681
+    9.4.3. Cluster ID ... 682
+    9.4.4. Features ... 682
+    9.4.5. Data Types ... 682
+    9.4.6. Attributes ... 682
+    9.4.7. Derived Cluster Namespace ... 683
+    9.4.8. Mode Examples ... 684
+  9.5. Water Heater Management Cluster ... 684
+    9.5.1. Revision History ... 684
+    9.5.2. Classification ... 684
+    9.5.3. Cluster ID ... 685
+    9.5.4. Features ... 685
+    9.5.5. Dependencies ... 685
+    9.5.6. Data Types ... 685
+    9.5.7. Attributes ... 687
+    9.5.8. Commands ... 690
+    9.5.9. Events ... 691
+  9.6. Water Heater Mode Cluster ... 691
+    9.6.1. Revision History ... 692
+    9.6.2. Classification ... 692
+    9.6.3. Cluster ID ... 692
+    9.6.4. Features ... 692
+    9.6.5. Data Types ... 692
+    9.6.6. Attributes ... 692
+    9.6.7. Derived Cluster Namespace ... 693
+    9.6.8. Mode Examples ... 694
+  9.7. Energy Preference Cluster ... 694
+    9.7.1. Revision History ... 694
+    9.7.2. Classification ... 694
+    9.7.3. Cluster ID ... 694
+    9.7.4. Features ... 695
+    9.7.5. Data Types ... 695
+    9.7.6. Attributes ... 696
+  9.8. Device Energy Management Mode Cluster ... 698
+    9.8.1. Revision History ... 698
+    9.8.2. Classification ... 698
+    9.8.3. Cluster ID ... 698
+    9.8.4. Features ... 699
+    9.8.5. Data Types ... 699
+    9.8.6. Attributes ... 699
+    9.8.7. Derived Cluster Namespace ... 700
+    9.8.8. Mode Examples ... 701
+Chapter 10. Network Infrastructure ... 703
+  10.1. General Description ... 703
+    10.1.1. Introduction ... 703
+    10.1.2. Cluster List ... 703
+  10.2. Wi-Fi Network Management Cluster ... 703
+    10.2.1. Revision History ... 703
+    10.2.2. Classification ... 703
+    10.2.3. Cluster ID ... 704
+    10.2.4. Attributes ... 704
+    10.2.5. Commands ... 705
+  10.3. Thread Border Router Management Cluster ... 706
+    10.3.1. Revision History ... 706
+    10.3.2. Classification ... 706
+    10.3.3. Cluster ID ... 706
+    10.3.4. Features ... 706
+    10.3.5. Attributes ... 707
+    10.3.6. Commands ... 708
+  10.4. Thread Network Directory Cluster ... 711
+    10.4.1. Revision History ... 711
+    10.4.2. Classification ... 711
+    10.4.3. Cluster ID ... 711
+    10.4.4. Data Types ... 711
+    10.4.5. Attributes ... 712
+    10.4.6. Commands ... 713
+    10.4.7. Guidance for Fabrics / Commissioners ... 715

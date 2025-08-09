@@ -1,0 +1,24 @@
+# Matter PDF TOC Extractor Requirements
+# Core dependencies for simple table of contents extraction
+
+# PDF processing
+PyMuPDF
+
+# LangChain and LangGraph for AI processing
+langchain
+langchain-community
+langchain-core
+langchain-google-genai
+langchain-huggingface
+langchain-text-splitters
+langgraph
+
+# Vector store and embeddings
+faiss-cpu
+sentence-transformers
+transformers
+
+# Utilities
+google-generativeai
+numpy
+requests
