@@ -134,7 +134,14 @@
             "name": "EffectVariantEnum",
             "base_type": "enum8",
             "constraint": null,
-            "values": []
+            "values": [
+              {
+                "value": "0x00",
+                "name": "Default",
+                "summary": "Indicates the default effect is used",
+                "conformance": "M"
+              }
+            ]
           }
         ],
         "attributes": [
