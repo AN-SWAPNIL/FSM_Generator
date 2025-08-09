@@ -6,10 +6,10 @@ Customize extraction parameters and settings here
 import os
 
 # API Configuration
-GOOGLE_API_KEY = 'AIzaSyDE-xI1A8ESXRd1G97F6nxhsqYgrlu6QNM'
+GOOGLE_API_KEY = 'AIzaSyAb_oS5Vgd6RWN1CHQjYifpcjrIZWP2k84'
 GEMINI_MODEL = "gemini-1.5-flash"
-GEMINI_TEMPERATURE = 0.1
-GEMINI_MAX_OUTPUT_TOKENS = 8192
+GEMINI_TEMPERATURE = 0.0  # More deterministic for detailed extraction
+GEMINI_MAX_OUTPUT_TOKENS = 16384  # Increased for comprehensive extraction
 
 # PDF Processing Configuration
 PDF_FILENAME = "Matter-1.4-Application-Cluster-Specification.pdf"
@@ -18,9 +18,9 @@ MAX_TOC_PAGES = 50  # Maximum pages to scan for TOC content
 
 # Vector Store Configuration
 EMBEDDINGS_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-CHUNK_SIZE = 1000
-CHUNK_OVERLAP = 200
-VECTOR_SEARCH_K = 5  # Number of documents to retrieve in similarity search
+CHUNK_SIZE = 1500  # Increased for better table capture
+CHUNK_OVERLAP = 500  # More overlap for table continuations
+VECTOR_SEARCH_K = 15  # More documents for comprehensive context
 
 # Output Configuration
 OUTPUT_JSON_FILE = "matter_clusters_toc.json"
@@ -223,121 +223,209 @@ Find ALL cluster entries and return them in the required JSON format.
 
 # Detailed Cluster Information Extraction Configuration
 CLUSTER_DETAIL_EXTRACTION_PROMPT = """
-You are extracting detailed technical information from a Matter protocol cluster specification.
+You are extracting comprehensive technical information from a Matter protocol cluster specification for formal verification and fuzzing.
 
 TASK: Extract ALL available information from the cluster specification and return ONLY valid JSON.
 
-IMPORTANT TABLE EXTRACTION RULES:
-- Find ALL tables in the specification, especially:
-  - Attributes tables (usually section X.Y.6 with columns: ID, Name, Type, Constraint, Quality, Default, Access, Conformance)
-  - Commands tables (usually section X.Y.7 with columns: ID, Name, Direction, Response, Access, Conformance)
-  - Data Types tables with enumeration values
-  - Features tables with bit mappings
-- Extract EVERY row from each table
-- Look for multi-page tables that continue across pages
-- Include ALL command fields and their details
+CRITICAL: DO NOT RETURN EMPTY ARRAYS IF INFORMATION EXISTS IN THE SPECIFICATION!
 
-REQUIRED JSON FORMAT:
+MANDATORY EXTRACTION REQUIREMENTS:
+
+1. ATTRIBUTES TABLE (Section X.Y.6):
+   - Extract EVERY attribute with ALL columns: ID, Name, Type, Constraint, Quality, Default, Access, Conformance
+   - Look for tables with headers like "ID | Name | Type | Constraint | Quality | Default | Access | Conformance"
+   - Include complete attribute descriptions from surrounding text
+
+2. COMMANDS TABLE (Section X.Y.7):
+   - Extract ALL commands with columns: ID, Name, Direction, Response, Access, Conformance
+   - For EACH command, extract ALL field definitions from command payload tables
+   - Look for command field tables with headers like "ID | Name | Type | Constraint | Default | Conformance"
+   - NEVER leave command fields arrays empty if fields are defined
+
+3. DATA TYPES (Sections X.Y.4-5):
+   
+   FOR ENUMERATIONS (enum8, enum16, etc.):
+   - Extract ALL enum values with hex codes (0x00, 0x01, etc.) and names
+   - Look for enum definition tables
+   - Example: StatusEnum with values like 0x00=Success, 0x01=Failure, etc.
+   
+   FOR BITMAPS (map8, map16, etc.):
+   - Extract ALL bit definitions with bit positions and names
+   - Look for bitmap tables showing which bits represent what features
+   - Example: FeatureMap with bit 0=Feature1, bit 1=Feature2, etc.
+   
+   FOR STRUCTURES (ending in "Struct"):
+   - **CRITICAL**: Structures have field definition tables in separate subsections
+   - Look for dedicated structure tables with columns: Field ID, Name, Type, Constraint, Quality, Default, Conformance
+   - Extract ALL field definitions with field order, names, types, conformance
+   - Structures contain multiple ordered fields, NOT enum values
+   - Example: SceneInfoStruct contains fields like SceneCount, CurrentScene, CurrentGroup
+   - Search for structure field definition tables in subsections (X.Y.4.1, X.Y.4.2, etc.)
+   - NEVER leave structure "values" empty if field definitions exist in the specification
+
+4. FEATURES TABLE (Section X.Y.3):
+   - Extract ALL features with bit positions, codes, names, descriptions
+   - Include feature dependencies and conformance requirements
+
+5. EVENTS (if present):
+   - Extract ALL events with IDs, names, priorities, access, conformance
+   - Extract ALL event field definitions for each event
+
+CRITICAL EXTRACTION RULES:
+- Search the ENTIRE cluster text for information, not just the beginning
+- Tables often span multiple pages - capture ALL rows
+- Look for continuation markers like "Table X.Y continued"
+- Check for embedded definitions within attribute/command descriptions
+- Extract hex values exactly as shown (0x0000, 0x01, etc.)
+- Preserve technical abbreviations and codes exactly
+- If information exists in the specification, EXTRACT IT - do not leave arrays empty
+
+ENHANCED JSON FORMAT:
 {{
   "cluster_info": {{
     "cluster_name": "exact cluster name",
-    "cluster_id": "hex ID (e.g., '0x0003')",
+    "cluster_id": "hex ID with 0x prefix",
     "classification": {{
-      "hierarchy": "hierarchy type",
-      "role": "role type", 
-      "scope": "scope type",
-      "pics_code": "PICS code"
+      "hierarchy": "hierarchy type (Base/Utility/Application)",
+      "role": "role type (Client/Server/Both)", 
+      "scope": "scope type (Node/Endpoint)",
+      "pics_code": "PICS code for testing"
     }},
     "revision_history": [
       {{
         "revision": "revision number",
-        "description": "change description"
+        "description": "change description",
+        "date": "revision date if available"
       }}
     ],
     "features": [
       {{
-        "bit": "bit number",
-        "code": "feature code",
-        "name": "feature name",
-        "summary": "feature description",
-        "conformance": "conformance requirement"
+        "bit": "bit number (0-31)",
+        "code": "feature code (2-4 chars)",
+        "name": "full feature name",
+        "summary": "detailed feature description",
+        "conformance": "M/O/F/C conformance",
+        "dependencies": "feature dependencies if any"
       }}
     ],
     "data_types": [
       {{
         "name": "data type name",
-        "base_type": "base data type",
+        "base_type": "base type (enum8/enum16/map8/map16/struct/etc.)",
+        "constraint": "constraints if any",
         "values": [
           {{
-            "value": "hex or numeric value",
-            "name": "value name",
-            "summary": "value description",
-            "conformance": "conformance requirement"
+            "value": "For ENUMS: hex code (0x00), For BITMAPS: bit number (0-7), For STRUCTS: field order (0,1,2...)",
+            "name": "For ENUMS: enum name, For BITMAPS: bit name, For STRUCTS: field name", 
+            "summary": "description of enum value/bit/field",
+            "conformance": "M/O/F conformance requirement"
           }}
         ]
       }}
     ],
     "attributes": [
       {{
-        "id": "attribute ID",
-        "name": "attribute name",
-        "type": "data type",
-        "constraint": "constraints",
-        "quality": "quality flags",
-        "default": "default value",
-        "access": "access permissions",
-        "conformance": "conformance requirement",
-        "summary": "attribute description"
+        "id": "hex attribute ID (0x0000)",
+        "name": "full attribute name",
+        "type": "data type (including custom types)",
+        "constraint": "value constraints, ranges, or 'desc'",
+        "quality": "quality flags (N/S/P/F/X/C)",
+        "default": "default value or 'desc' if varies",
+        "access": "access permissions (R/W/RW, may include F for fabric)",
+        "conformance": "M/O/F conformance requirement",
+        "summary": "attribute description and purpose",
+        "fabric_sensitive": "true/false if fabric-scoped",
+        "scene_capable": "true/false if supports scenes"
       }}
     ],
     "commands": [
       {{
-        "id": "command ID",
-        "name": "command name",
-        "direction": "direction (client->server or server->client)",
-        "response": "response command",
-        "access": "access permissions",
-        "conformance": "conformance requirement",
-        "summary": "command description",
+        "id": "hex command ID (0x00)",
+        "name": "full command name",
+        "direction": "client→server or server→client",
+        "response": "response command name or 'DefaultResponse'",
+        "access": "access level (A/V/M/etc.) and fabric requirements",
+        "conformance": "M/O/F conformance requirement",
+        "summary": "command description and purpose",
+        "timing": "timing requirements if specified",
         "fields": [
           {{
-            "id": "field ID",
+            "id": "field ID or order",
             "name": "field name",
             "type": "data type",
-            "constraint": "constraints",
-            "quality": "quality flags",
-            "default": "default value",
-            "conformance": "conformance requirement"
+            "constraint": "constraints or ranges",
+            "quality": "quality flags if any",
+            "default": "default value if any",
+            "conformance": "M/O/F for this field",
+            "summary": "field description"
           }}
         ]
       }}
     ],
     "events": [
       {{
-        "id": "event ID",
-        "name": "event name",
-        "priority": "event priority",
-        "access": "access permissions",
-        "conformance": "conformance requirement"
+        "id": "hex event ID (0x00)",
+        "name": "full event name", 
+        "priority": "event priority (Info/Critical/Debug)",
+        "access": "access requirements",
+        "conformance": "M/O/F conformance",
+        "summary": "event description",
+        "fields": [
+          {{
+            "id": "field ID",
+            "name": "field name",
+            "type": "data type",
+            "conformance": "field conformance"
+          }}
+        ]
+      }}
+    ],
+    "global_attributes": [
+      {{
+        "id": "global attribute ID",
+        "name": "global attribute name",
+        "conformance": "conformance for this cluster"
       }}
     ]
   }}
 }}
 
-CRITICAL INSTRUCTIONS:
-1. Extract ALL sections present in the cluster specification
-2. Return ONLY valid JSON with NO explanatory text
-3. Use empty arrays [] ONLY if sections are truly not present in the specification
-4. Preserve exact naming and formatting from the specification
-5. Include all technical details like IDs, types, constraints, etc.
-6. Pay special attention to tabular data - extract ALL rows
-7. Look for continuation of tables across multiple pages
+EXTRACTION STRATEGY:
+1. **Section Scanning**: Look for numbered subsections (X.Y.3 Features, X.Y.4 Data Types, X.Y.5 Enums, X.Y.6 Attributes, X.Y.7 Commands)
+2. **Deep Subsection Analysis**: Scan X.Y.Z.1, X.Y.Z.2 subsections for detailed definitions (like "1.10.5.1 ModeTagStruct Type")
+3. **Table Extraction**: Find tables with column headers and extract ALL rows completely
+4. **Structure Field Tables**: Look for field definition tables within structure type subsections
+5. **Enum Value Lists**: Extract complete enum value tables with hex codes and names
+6. **Command Field Definitions**: Find command payload field tables within command subsections
+7. **Status Code Tables**: Extract status code definitions and ranges
+8. **Mode/Tag Namespaces**: Look for value namespace tables with semantic meanings
+9. **Multi-page Continuations**: Handle tables that span multiple pages or sections
+10. **Constraint Details**: Capture detailed constraint specifications (max values, ranges, dependencies)
 
-Extract from the provided cluster specification text and return valid JSON only.
+CRITICAL INSTRUCTIONS:
+1. **NEVER RETURN EMPTY ARRAYS IF DATA EXISTS**: Every enum, bitmap, struct, and command with defined values/fields MUST have populated arrays
+2. **COMPLETE TABLE EXTRACTION**: Extract EVERY row from EVERY table - attributes, commands, enums, structs, status codes
+3. **DEEP SUBSECTION SCANNING**: Look for X.Y.Z.1, X.Y.Z.2 subsections that define structure fields, enum values, command fields
+4. **FIELD DEFINITION EXTRACTION**: For structures like ModeTagStruct, extract ALL field definitions with IDs, names, types, conformance
+5. **ENUM VALUE EXTRACTION**: For enums, extract ALL values with hex codes, names, and descriptions (e.g., 0x0000: Auto, 0x0001: Quick)
+6. **COMMAND FIELD EXTRACTION**: For commands, extract ALL field definitions from command payload tables
+7. **STATUS CODE EXTRACTION**: Extract complete status code tables with codes, names, and descriptions
+8. **CONSTRAINT PRESERVATION**: Capture exact constraint specifications (max 64, desc, 0x0000 to 0x3FFF, etc.)
+9. **CONFORMANCE DETAILS**: Record precise conformance requirements (M, O, F, C, conditional logic)
+10. **VALIDATION CHECK**: Before returning JSON, verify that no data_types, commands, or other sections have empty arrays when data exists in specification
+
+**QUALITY ASSURANCE**:
+- If you see a table in the specification, extract ALL rows from it
+- If you see enum definitions like "0x00 = Value1, 0x01 = Value2", extract ALL values
+- If you see structure field definitions, extract ALL fields
+- If you see command field tables, extract ALL fields for each command
+- EMPTY ARRAYS INDICATE INCOMPLETE EXTRACTION - avoid them unless truly no data exists
+
+Extract from the provided cluster specification text and return complete valid JSON only.
 """
 
 # Page buffer for cluster extraction (pages before and after cluster boundaries)
-CLUSTER_PAGE_BUFFER = 1
+CLUSTER_PAGE_BUFFER = 2  # Increased to capture more context and table continuations
 
 # Page offset - number of pages before actual content starts (TOC pages, covers, etc.)
 PDF_PAGE_OFFSET = 4  # Actual content starts at PDF page 5, but TOC refers to logical page 1

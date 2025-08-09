@@ -187,18 +187,20 @@ class ClusterDetailExtractor:
             FAISS vector store or None if failed
         """
         try:
-            # Create text splitter with better parameters for technical specifications
+            # Create text splitter optimized for technical specifications and tables
             text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=1500,  # Increased chunk size for better table capture
-                chunk_overlap=300,  # More overlap to capture table continuations
+                chunk_size=2000,  # Larger chunks to capture complete tables
+                chunk_overlap=400,  # More overlap to handle table continuations
                 separators=[
-                    "\n\n\n",  # Major section breaks
-                    "\n\n",    # Paragraph breaks
-                    "\n",      # Line breaks
-                    ".",       # Sentence breaks
-                    " ",       # Word breaks
+                    "\n\n\n\n",  # Major section breaks (multiple newlines)
+                    "\n\n\n",    # Section breaks  
+                    "\n\n",      # Paragraph breaks
+                    "\n",        # Line breaks
+                    ".",         # Sentence breaks
+                    " ",         # Word breaks
                 ],
-                length_function=len
+                length_function=len,
+                keep_separator=True  # Keep separators to maintain table structure
             )
             
             # Create documents
@@ -231,20 +233,28 @@ class ClusterDetailExtractor:
             Extracted cluster information as dictionary
         """
         try:
-            # Create retriever with more documents for complex content
+            # Create retriever with more documents for comprehensive extraction
             retriever = vector_store.as_retriever(
                 search_type="similarity",
-                search_kwargs={"k": 10}  # Increased to get more context
+                search_kwargs={"k": 15}  # Increased to get more comprehensive context
             )
             
-            # Retrieve multiple types of relevant documents
+            # Retrieve comprehensive types of relevant documents for enhanced extraction
             search_queries = [
-                f"cluster information for {cluster_name}",
-                f"attributes table {cluster_name}",
-                f"commands table {cluster_name}",
-                f"data types {cluster_name}",
-                f"features {cluster_name}",
-                f"classification hierarchy role scope {cluster_name}"
+                f"{cluster_name} cluster overview classification",
+                f"{cluster_name} attributes table ID name type constraint default access conformance",
+                f"{cluster_name} commands table ID name direction response access conformance", 
+                f"{cluster_name} data types enum bitmap values conformance",
+                f"{cluster_name} features table bit code name conformance",
+                f"{cluster_name} revision history changes",
+                f"{cluster_name} global attributes supported",
+                f"{cluster_name} command fields payload structure",
+                f"{cluster_name} events table priority access",
+                f"{cluster_name} fabric scoped attributes commands",
+                f"{cluster_name} mandatory optional feature dependent",
+                f"{cluster_name} access privileges read write fabric",
+                f"{cluster_name} default values constraints ranges",
+                f"{cluster_name} enumeration bitmap mapping values"
             ]
             
             all_docs = []
@@ -307,25 +317,51 @@ Retrieved relevant context:
             Extracted cluster information as dictionary
         """
         try:
-            # Generate enhanced extraction prompt with cluster name and more context
+            # Generate enhanced extraction prompt with comprehensive pattern recognition
             prompt = f"""{CLUSTER_DETAIL_EXTRACTION_PROMPT}
 
 TARGET CLUSTER: {cluster_name}
 
-IMPORTANT: Look for these specific patterns in the text:
-1. Tables with pipe delimiters (|) or formatted spacing
-2. Hex IDs starting with 0x
-3. Section headers like "1.X.X" numbered sections
-4. Words like "Attributes", "Commands", "Data Types", "Classification"
-5. Direction indicators like → or ⇒ for commands
-6. Conformance codes: M (Mandatory), O (Optional), F (Feature-dependent)
+CRITICAL PATTERN RECOGNITION - Look for these specific elements:
 
-SPECIAL ATTENTION: This cluster has {len(cluster_text)} characters of text. 
-Make sure to scan the ENTIRE text for Commands section, not just the beginning.
-Commands section typically appears after Data Types and Attributes sections.
+1. TABLE STRUCTURES:
+   - Attributes table with columns: ID | Name | Type | Constraint | Quality | Default | Access | Conformance
+   - Commands table with columns: ID | Name | Direction | Response | Access | Conformance  
+   - Features table with columns: Bit | Code | Name | Summary | Conformance
+   - Data types with enum/bitmap values and hex codes
 
-Cluster specification text:
-{cluster_text}"""  # Remove character limit to process full text
+2. TECHNICAL IDENTIFIERS:
+   - Hex IDs: 0x0000, 0x0001, etc.
+   - Conformance codes: M (Mandatory), O (Optional), F (Feature-dependent), C (Conditional)
+   - Access flags: R (Read), W (Write), RW (Read-Write), F (Fabric-scoped)
+   - Quality flags: N (Non-volatile), S (Scene), P (Persistent), etc.
+   - Direction symbols: → ⇒ (client to server), ← ⇐ (server to client)
+
+3. SECTION STRUCTURE:
+   - X.Y.2 Classification (hierarchy, role, scope)
+   - X.Y.3 Features table
+   - X.Y.4 Data Types definitions
+   - X.Y.5 Enumerations and bitmaps
+   - X.Y.6 Attributes table
+   - X.Y.7 Commands table
+   - X.Y.8 Events (if present)
+
+4. VALUE EXTRACTION:
+   - Default values in quotes or specific formats
+   - Constraint ranges (0-65535, etc.)
+   - Enum mappings with names and hex values
+   - Feature bit positions and codes
+
+EXTRACTION PRIORITY:
+1. Find and extract COMPLETE tables (may span multiple pages)
+2. Capture ALL rows, including continuation across pages
+3. Extract embedded enum/bitmap definitions
+4. Include constraint specifications and default values
+5. Document access privileges and conformance requirements
+6. Capture command field structures and payload definitions
+
+TEXT TO ANALYZE ({len(cluster_text)} characters):
+{cluster_text}"""
             
             # Extract with LLM
             response = self.llm.invoke(prompt)
@@ -533,7 +569,7 @@ def main():
         
         # Process all clusters with resume capability
         logger.info("Starting cluster detail extraction for ALL clusters")
-        results = extractor.process_all_clusters(resume=True)  # Enable resume by default
+        results = extractor.process_all_clusters(limit=5, resume=True)  # Enable resume by default
         
         # Save final results
         extractor.save_results(results, output_path)
